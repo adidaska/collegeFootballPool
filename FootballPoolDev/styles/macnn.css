@@ -1,0 +1,501 @@
+/* @override http://www.macnn.com/_styles/styles_screenmin.css */
+
+/* CSS Document */
+
+/*spry_slidingpanels.css*/
+
+#ts_container1, #ts_container2, #ts_container3, #ts_container4 {
+	width: 600px;
+	height: 132px;
+	margin: 0 0 0 20px;
+	padding: 0;
+	overflow: hidden;
+}
+
+/*	main SlidingPanels container
+	Avoid placing any CSS border or padding properties on the SlidingPanels container
+	as they can affect the proper positioning and sliding animations of the contents
+	inside the container.  */
+.SlidingPanels {
+	position: relative;
+	width: 600px;
+	height: 124px;
+	float: left;
+	margin-top: 12px;
+	padding: 0px;
+	border: none;
+}
+
+/* 	selector for the container that holds all of the content panels for the widget
+	You can make the panels within the SlidingPanelsContentGroup container layout slide
+	horizontally by giving the SlidingPanelsContentGroup container a width that is as wide
+	or larget than the sum of the widths of all of the content panels, and then floating
+	the content panels inside the SlidingPanelsContentGroup container so they all appear
+	on the same line.  */
+.SlidingPanelsContentGroup {
+	position: relative;
+	float: left;
+	width: 10000px;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+
+/*	selector for the container that holds content for a given panel  */
+.SlidingPanelsContent {
+	width: 600px;
+	height: 124px;
+	float: left;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+
+/*	programatically added to the SlidingPanels container
+	automatically removed once the animation has stopped so that the overflow
+	properties of the content inside the widget should be restored.  */
+.SlidingPanelsAnimating * {
+	overflow: hidden !important;
+}
+
+/*	programatically added to the SlindingPanelsContent that is currently visible  */
+.SlidingPanelsCurrentPanel {
+}
+
+/*	programatically added to the SlidingPanels container  */
+.SlidingPanelsFocused {
+}
+
+#ts_slider { float: left; width: 10000px; }
+
+.ts_item {
+	position: relative;
+	width: 150px;
+	height: 124px;
+	float: left;
+	font-size: 12px;
+	font-weight: bold;
+	color: #222;
+	text-decoration: none;
+	cursor: pointer;
+	
+}
+
+.ts_item a:link, .ts_item a:visited { color: #222; text-decoration: none; border: none; }
+
+.ts_item h2 { margin: 0; position: absolute; top: 10px; font-size: 12px; color: #0066aa;
+	width: 130px;
+	text-align: center;
+	padding-top: 0;
+	padding-bottom: 0;
+	left: 10px;
+}
+.ts_item h1 { margin: 0; padding: 0; position: absolute; top: 30px; font-size: 12px; color: #3a3a3a;
+	width: 130px;
+	left: 10px;
+	bottom: 75px;
+	text-align: center;
+}
+
+.ts_item:hover h1, .ts_item:hover h2 { color: #0066aa; }
+
+.ts_small, .ts_small a:link, .ts_small a:visited { font-size: 10px; color: #777; text-decoration: none; }
+/*
+.ts_item a:hover, .ts_item a:active, .ts_small a:hover, .ts_small a:active { color: #0066aa; text-decoration: none; }
+*/
+.ts_text { width: 120px; position: absolute; left: 13px; top: 10px; z-index: 2; font-size: 12px; line-height: 13px; }
+
+.ts_nav { width: 52px; height: 15px; margin: 1px 0 0 24px; padding: 0; }
+
+#tsnav11 { width: 15px; float: left; background: url('http://cache.macnn.com/macnn/_images/ts_nav_left0.gif') left top no-repeat; }
+#tsnav11:hover { background: url('http://cache.macnn.com/macnn/_images/ts_nav_left1.gif') left top no-repeat; }
+#tsnav12 { width: 11px; float: left; background: url('http://cache.macnn.com/macnn/_images/ts_nav_ctr0.gif') left top no-repeat; }
+#tsnav12:hover { background: url('http://cache.macnn.com/macnn/_images/ts_nav_ctr1.gif') left top no-repeat; }
+#tsnav13 { width: 11px; float: left; background: url('http://cache.macnn.com/macnn/_images/ts_nav_ctr0.gif') left top no-repeat; }
+#tsnav13:hover { background: url('http://cache.macnn.com/macnn/_images/ts_nav_ctr1.gif') left top no-repeat; }
+#tsnav14 { width: 15px; float: left; background: url('http://cache.macnn.com/macnn/_images/ts_nav_right0.gif') left top no-repeat; }
+#tsnav14:hover { background: url('http://cache.macnn.com/macnn/_images/ts_nav_right1.gif') left top no-repeat; }
+/*spry sliding panels ends*/
+/* spry collapse */
+/*  container for the whole shebang  */
+.CollapsiblePanel { margin: 0px; padding: 0px; }
+
+/*  panel title  */
+.CollapsiblePanelTab { margin: 0px; cursor: pointer; -moz-user-select: none; -khtml-user-select: none; }
+
+/*  CollapsiblePanel content area.  */
+.CollapsiblePanelContent { margin: 0px; padding: 0px; }
+
+.ie7 .CollapsiblePanelContent, .ie6 .CollapsiblePanelContent
+{
+margin: 0px; padding: 0px; padding-bottom:5px;
+}
+/*  appearance of PanelTab when OPEN  */
+.CollapsiblePanelOpen .CollapsiblePanelTab {}
+
+/*  appearance of PanelTab when CLOSED  */
+.CollapsiblePanelClosed .CollapsiblePanelTab {}
+
+/*  appearance of PanelTab when HOVERING  */
+.CollapsiblePanelOpen .CollapsiblePanelTab:hover { background: url('http://cache.macnn.com/macnn/_images/mod_hd_up1.gif') left top no-repeat; }
+
+/*  appearance of PanelTab when FOCUSSED  */
+.CollapsiblePanelFocused .CollapsiblePanelTab {}
+
+/*  test  */
+.CollapsiblePanelClosed .CollapsiblePanelTab { background: url('http://cache.macnn.com/macnn/_images/mod_hd_down0.gif') left top no-repeat; }
+
+.CollapsiblePanelClosed .CollapsiblePanelTab:hover { background: url('http://cache.macnn.com/macnn/_images/mod_hd_down1.gif') left top no-repeat; }
+/* spry collpase ends*/
+/* spry tabs */
+/*  main TabbedPanels container; floated left  */
+.TabbedPanels {
+	margin: 0;
+	padding: 0;
+	float: left;
+	clear: none;
+}
+
+.ie .TabbedPanels 
+{
+float:none;
+}
+.TabbedPanels ul { margin: 0 0 0 10px; }
+
+
+/*  TabGroup container, container for all tab buttons  */
+.TabbedPanelsTabGroup {
+	margin: 0;
+	padding: 0;
+}
+
+/*  panel title  */
+.TabbedPanelsTab {
+	height: 23px;
+	z-index:1;
+	position: relative;
+	top: 0;
+	float: left;
+	margin: 0;
+	list-style-type: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	cursor: pointer;
+	font-size: 13px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	color: #526b8d;
+	border-left: #fff 1px solid;
+	border-right: #b2b2b2 1px solid;
+}
+
+/*  panel title, MAIN COLUMN  */
+.mainTabs {
+	padding: 7px 20px 0 20px;
+}
+
+/*  panel title, SIDEBAR  */
+.sbTabs {
+	padding: 7px 10px 0 10px;
+}
+
+.TabbedPanelsTabDummy { 
+	height: 23px;
+	position: relative;
+	top: 0;
+	float: left;
+	padding: 7px 10px 0 10px;
+	margin: 0;
+	list-style-type: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	cursor: default;
+	border-right: none;
+	border-left: #fff 1px solid;
+	
+}
+
+
+/*  panel title HOVER  */
+.TabbedPanelsTabHover {
+	background: url('http://cache.macnn.com/macnn/_images/tab_bg_hover.gif') left bottom repeat-x;
+	color: #002c66;
+}
+
+/*  panel title SELECTED  */
+.TabbedPanelsTabSelected {
+	height: 24px;
+/*	padding: 7px 20px 0 20px;*/
+	margin: 0;
+	color: #002c66;
+	background: url('http://cache.macnn.com/macnn/_images/tab_bg_active.gif') left bottom repeat-x;
+	cursor: default;
+	z-index:1;
+}
+
+/*  panel title, TEXT  */
+.TabbedPanelsTab a {
+	color: black;
+	text-decoration: none;
+	z-index:1;
+}
+
+/*  container for content panels  */
+.TabbedPanelsContentGroup {
+	clear: both;
+}
+
+/*  content panels  */
+.TabbedPanelsContent {}
+
+/*  content panels ACTIVE  */
+.TabbedPanelsContentVisible { }
+/* spry tabs end */
+/* styles screen */
+/*  @group overarching  */* {outline: none;}body {	margin: 0;	padding: 0;	background: #b4b5b7;	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;	font-size: 12px;	line-height: 16px;	text-align: center;	color: #222;}.container {	width: 1000px;	margin: 0 auto;	padding: 0;	text-align: left;}/*  @end  *//*  @group header  */#header {	width: 100%;	position: relative;	height: 180px;	background: url('http://cache.macnn.com/macnn/_images/header_bg.gif') left top repeat-x;}.ie6 #header { background: url('http://cache.macnn.com/macnn/_images/header_bg_ie6.gif') left top repeat-x; }#leaderboard {	position: absolute;	right: 10px;	top: 12px;	width: 728px;	height: 90px;	margin: 0;	padding: 1px;	background: #ababac;}#navigation {	height: 90px;	margin: 0;	padding: 86px 0 0 0;	font-family: Helvetica, Arial, sans-serif;}/*  container for macnn logo, home link  */#nav-p_home {	width: 184px;	height: 88px;	position: absolute;	left: 0;	top: 0;	background: url('http://cache.macnn.com/macnn/_images/nav-p_logo0.png') left top no-repeat;}#nav-p_home:hover { background: url('http://cache.macnn.com/macnn/_images/nav-p_logo1.png') left top no-repeat; }.ie6 #nav-p_home { background: url('http://cache.macnn.com/macnn/_images/nav-p_logo0.gif') left top no-repeat; }.ie6 #nav-p_home:hover { background: url('http://cache.macnn.com/macnn/_images/nav-p_logo1.gif') left top no-repeat; }/*  list formatting for primary nav tabs  */#nav-p {	margin: 0;	padding: 31px 0 0 176px;}/*  primary nav, list items, level 1  */#nav-p li {	height: 32px;	float: left;	list-style-type: none;	display: block;	font-size: 12px;	font-weight: bold;}/*  tabs, link formatting  */#nav-p li a:link, #nav-p li a:visited {	color: #ebeef1;	text-decoration: none;	text-shadow: #111 0px 1px 4px;	display: block;	float: left;}#nav-p li a:hover, #nav-p li a:active { color: #072c5c; text-shadow: #8e7a00 0px 1px 4px; }/*  the leftmost tab (content)  */.np_tabl2 {	height: 20px;	padding: 12px 2px 0 16px;	background: url('http://cache.macnn.com/macnn/_images/nav-p_tab0_left2.gif') left top no-repeat;}.ie8 .np_tabl2,.ie7 .np_tabl2,.ie6 .np_tabl2{ height:32px; }.np_tabl2:hover { background: url('http://cache.macnn.com/macnn/_images/nav-p_tab1_left2.gif') left top no-repeat; }/*  "regular" tabs, left (content) part  */.np_tabl {	height: 20px;	padding: 12px 2px 0 12px;	background: url('http://cache.macnn.com/macnn/_images/nav-p_tab0_left.gif') left top no-repeat;}.ie8 .np_tabl,.ie7 .np_tabl,.ie6 .np_tabl{ height:32px; }.np_tabl:hover { background: url('http://cache.macnn.com/macnn/_images/nav-p_tab1_left.gif') left top no-repeat; }/*  "regular" tabs, right (rounded corner only) part  */.np_tabr {	width: 10px;	height: 32px;	background: url('http://cache.macnn.com/macnn/_images/nav-p_tab0_right.gif') right top no-repeat;}/*  rightmost tab, right (rounded corner only) part  */.np_tabr2 {	width: 14px;	height: 32px;	background: url('http://cache.macnn.com/macnn/_images/nav-p_tab0_right2.gif') right top no-repeat;}/*  nav container META NAV  */#nav-m {	right: 0;	width: 356px;	height: 57px;	float: right;}/*  button 1, rss  */#nm-rss {	width: 50px;	height: 57px;	float: left;	background: url('http://cache.macnn.com/macnn/_images/meta_rss0.png') left top no-repeat;	cursor: pointer;}#nm-rss:hover { background: url('http://cache.macnn.com/macnn/_images/meta_rss1.png') left top no-repeat; }.ie6 #nm-rss { background: url('http://cache.macnn.com/macnn/_images/meta_rss0.gif') left top no-repeat; }.ie6 #nm-rss:hover { background: url('http://cache.macnn.com/macnn/_images/meta_rss1.gif') left top no-repeat; }/*  button 2, podcasts  */#nm-podcasts {	width: 46px;	height: 57px;	float: left;	background: url('http://cache.macnn.com/macnn/_images/meta_podcasts0.png') left top no-repeat;	cursor: pointer;}#nm-podcasts:hover { background: url('http://cache.macnn.com/macnn/_images/meta_podcasts1.png') left top no-repeat; }.ie6 #nm-podcasts { background: url('http://cache.macnn.com/macnn/_images/meta_podcasts0.gif') left top no-repeat; }.ie6 #nm-podcasts:hover { background: url('http://cache.macnn.com/macnn/_images/meta_podcasts1.gif') left top no-repeat; }/*  button 3, user tools  */#nm-tools {	width: 46px;	height: 57px;	float: left;	background: url('http://cache.macnn.com/macnn/_images/meta_tools0.png') left top no-repeat;	cursor: pointer;}#nm-tools:hover { background: url('http://cache.macnn.com/macnn/_images/meta_tools1.png') left top no-repeat; }.ie6 #nm-tools { background: url('http://cache.macnn.com/macnn/_images/meta_tools0.gif') left top no-repeat; }.ie6 #nm-tools:hover { background: url('http://cache.macnn.com/macnn/_images/meta_tools1.gif') left top no-repeat; }/*  "button" 4, search  */#nm-search {	width: 214px;	height: 57px;	float: left;	background: url('http://cache.macnn.com/macnn/_images/meta_search_bg.png') left top no-repeat;}.ie6 #nm-search { background: url('http://cache.macnn.com/macnn/_images/meta_search_bg.gif') left top no-repeat; }#nm-search form {	margin: 20px 0 0 30px;	padding: 0;}.gecko #nm-search form { margin: 21px 0 0 30px; }.ie7 #nm-search form { margin: 18px 0 0 30px; }#nm-search input {	width: 142px;	height: 14px;	margin: 0;	padding: 0;	border: none;	background: #fafbfc;	font-size: 10px;	color: #5f7999;}#nm-search input:focus { color: #072c5c; border: none; }/*  button for extended search options  */#searchext {	width: 13px;	height: 13px;	position: absolute;	top: 51px;	right: 22px;	background: url('http://cache.macnn.com/macnn/_images/meta_searchext0.gif') left top repeat;	cursor: pointer;}#searchext:hover { background: url('http://cache.macnn.com/macnn/_images/meta_searchext1.gif') left top repeat; }/*  secondary navigation, container  */.sec_nav {	width: 100%;	height: 27px;	position: absolute;	top: 149px;	margin: 0;	padding: 7px 0 0 0;	background: url(http://cache.macnn.com/macnn/_images/nav_sec_bg.gif) left top repeat-x;	text-align: center;	font-size: 12px;	font-weight: bold;}.ie .sec_nav { padding: 6px 0 0 0; }.snav_c { width: 616px; margin: 0 auto; text-align: left; font-size:11px; }/*  secondary navigation, link items  */.snav_c a:link, .snav_c a:visited {	margin: 0 16px 0 0;	padding: 3px 0;	color: #072c5c;	text-decoration: none;	text-shadow: #8e7a00 0px 1px 4px;}.snav_c a:hover, .snav_c a:active { color: #fff; text-shadow: #8e7a00 0px 1px 4px; }/*  @end  *//*  @group content area, overarching  */#content {	background: url('http://cache.macnn.com/macnn/_images/content_bg.gif') left top repeat-x;	margin: 0;	padding: 0 0 24px 0;}.ie6 #content { background-image: none; }/*  @end  *//*  @group content area, left column  *//*  left content column, container  */#main {	width: 640px;	float: left;	margin: 0;	padding: 0;}/*  notification area, left  */#ntf-l {	width: 620px;	height: 30px;	margin: 2px 0 10px 10px;	padding: 0;	background: url('http://cache.macnn.com/macnn/_images/ntf_left_bg.png') left top no-repeat;	font-size: 10px;	line-height: 10px;}.win #ntf-l { font-size: 11px; }#ntf-text-l {	margin: 0;	padding: 11px 0 0 0;	font-weight: bold;	text-shadow: #fff 0 1px 2px; text-decoration:none;}#ntf-text-l a:link, #ntf-text-l a:visited { color: #002c66; text-decoration: none; }#ntf-text-l a:hover, #ntf-text-l a:active { color: #006699; text-decoration: none; }#ntf-text-l a{text-decoration:none;}#ntf-text-l1 {	margin: 0 28px 0 20px;	color: #566882;}.win #ntf-text-l1 { margin: 0 22px 0 20px; }.ntf-close { width: 13px; height: 13px; margin: 9px 10px 0 0; float: right; background: url('http://cache.macnn.com/macnn/_images/ntf_close0.gif') left top no-repeat; cursor: pointer; }.ntf-close:hover { background: url('http://cache.macnn.com/macnn/_images/ntf_close1.gif') left top no-repeat; }/*  main, content module, blue header  */.main-mod-hd {	width: 640px;	height: 36px;	background: url(http://cache.macnn.com/macnn/_images/content_mod_hd.png) no-repeat left top;}.ie6 .main-mod-hd { background: url('http://cache.macnn.com/macnn/_images/content_mod_hd_ie6.gif') left top no-repeat; }/*  title text inside blue header; for MAIN  */.mod-hd-title {	margin: 0 0 0 30px;	padding: 12px 0 0 0;	float: left;	color: #eaedf1;	text-transform: lowercase;	text-shadow: #000 0px 1px 4px;
+	font: bold 13px/15px Helvetica, Arial, sans-serif;
+}.ie6 .mod-hd-title { margin: 0; padding: 12px 0 0 30px; }/*  font for blue header, secondary font color (date)  */.mod-hd-title-dark { padding: 0 0 0 4px; color: #95a5b9; }/*  links inside blue header bar  */.mod-hd-title a {	margin: 0;	padding: 6px 20px 4px 0;	background: url('http://cache.macnn.com/macnn/_images/mod_hd_breadcrumb.gif') right top no-repeat;}.win.gecko .mod-hd-title a { padding: 6px 20px 4px 0; }.gecko .mod-hd-title a { padding: 7px 20px 4px 0; }.ie .mod-hd-title a { padding: 5px 20px 4px 0; }.mod-hd-title a:link, .mod-hd-title a:visited { color: #95a5b9; text-decoration: none;}.mod-hd-title a:hover, .mod-hd-title a:active { color: #eaedf1; text-decoration: none; }/*  title text inside blue header; for SIDEBAR  */.mod-hd-title-sb { margin: 0 0 0 20px; }/*  collapse/expand button in blue header; for MAIN & SIDEBAR  */.mod-hd-right1 {	width: 13px;	height: 13px;	margin: 14px 20px 0 0;	padding: 0;	float: right;	background: url('http://cache.macnn.com/macnn/_images/mod_hd_up0.gif') left top no-repeat;}.ie6 .mod-hd-right1 { margin: 14px 10px 0 0; }/*  layout switcher button in blue header; for MAIN & SIDEBAR  */.mod-hd-right2 {	width: 27px;	height: 13px;	margin: 14px 10px 0 0;	padding: 0;	float: right;	background: url('http://cache.macnn.com/macnn/_images/mod_hd_layoutswitch0.gif') left top no-repeat;}/*  layout switcher button in blue header; for MAIN & SIDEBAR  */.mod-hd-right2:hover {	background: url('http://cache.macnn.com/macnn/_images/mod_hd_layoutswitch1.gif') left top no-repeat;}
+.mod-hd-right2hover {	width: 27px;	height: 13px;	margin: 14px 10px 0 0;	padding: 0;	float: right;	background: url('http://cache.macnn.com/macnn/_images/mod_hd_layoutswitch1.gif') left top no-repeat;}/*  layout switcher button in blue header; for MAIN & SIDEBAR  */.mod-hd-right2hover:hover {	background: url('http://cache.macnn.com/macnn/_images/mod_hd_layoutswitch0.gif') left top no-repeat;}
+/*  main, content module, center  */.main-mod-cnt {	padding: 16px 0 0 0;	background: url('http://cache.macnn.com/macnn/_images/content_mod_ctr.png') left top no-repeat;}.ie6 .main-mod-cnt { background: url('http://cache.macnn.com/macnn/_images/content_mod_ctr_ie6.gif') left top no-repeat; }
+.ie7 .main-mod-cnt,.ie8 .main-mod-cnt { background: url('http://cache.macnn.com/macnn/_images/content_mod_ctr_ie6.gif') left top no-repeat; }/*  main, content module, center WITH TABS  */.main-mod-cnt-tabs {	background: url('http://cache.macnn.com/macnn/_images/content_mod_ctr_tabs.png') left top no-repeat;	}.ie6 .main-mod-cnt-tabs { background: url('http://cache.macnn.com/macnn/_images/content_mod_ctr_tabs_ie6.gif') left top no-repeat; }.ie8 .main-mod-cnt-tabs,.ie7 .main-mod-cnt-tabs { background: url('http://cache.macnn.com/macnn/_images/content_mod_ctr_tabs_ie6.gif') left top no-repeat; }/*  main, content module, footer  */.main-mod-ft {	height: 16px;	background: url('http://cache.macnn.com/macnn/_images/content_mod_ft.png') left bottom no-repeat;}.ie6 .main-mod-ft { background: url('http://cache.macnn.com/macnn/_images/content_mod_ft_ie6.gif') left bottom no-repeat; }.ie .main-mod-ft { height:auto;}#topstories {  }#newstoday {  }/*  striped background for "breaking news"  */#breaking { background: url('http://cache.macnn.com/macnn/_images/content_breaking_bg.png') left bottom no-repeat; }.ie6 #breaking { background: url('http://cache.macnn.com/macnn/_images/content_breaking_bg_ie6.gif') left bottom no-repeat; }.breaking_img {	float: right;	margin: 0 0 0 4px;}/*  post container  */.post {	margin: 0 24px 0 30px;	padding: 0 0 16px 0;}.post_date {	float: right;	margin: 0 6px 0 0;}.post p {	margin: 0;	padding: 4px 4px 0 0;}.post p a:link, .post p a:visited, .post td a:link,.post td a:visited  { color: #0066aa; padding: 0 1px; }.post p a:hover, .post p a:active,.post td a:hover { color: #0066aa; background: #ffda00; text-decoration: none; }.post_img {	float: right;	margin: 0 0 0 4px; text-align:center;}.post_tools {	width: 160px;	height: 15px;	margin: 0px 0 0 8px;	padding: 0;	font-size: 9px;	line-height: 15px;	font-family: Helvetica, Arial, sans-serif;}.pt_digg {	width: 54px;	height: 15px;	float: left;	text-align: right;	background: url('http://cache.macnn.com/macnn/_images/badges/pt_digg_bg0.gif') left bottom no-repeat;}.pt_digg:hover { background: url('http://cache.macnn.com/macnn/_images/badges/pt_digg_bg1.gif') left bottom no-repeat; cursor: pointer; }.pt_mail {	width: 53px;	height: 15px;	float: left;	text-align: right;	background: url('http://cache.macnn.com/macnn/_images/badges/pt_mail_bg0.gif') left bottom no-repeat;}.pt_mail:hover { background: url('http://cache.macnn.com/macnn/_images/badges/pt_mail_bg1.gif') left top no-repeat; cursor: pointer; }.pt_discuss {	width: 53px;	height: 15px;	float: left;	text-align: right;	background: url('http://cache.macnn.com/macnn/_images/badges/pt_discuss_bg0.gif') left top no-repeat;}.pt_discuss:hover { background: url('http://cache.macnn.com/macnn/_images/badges/pt_discuss_bg1.gif') left top no-repeat; cursor: pointer; }.pt_digg a { margin: 0 17px 0 0; }.pt_mail a { margin: 0 6px 0 0; }.pt_discuss a { margin: 0 13px 0 0; }.pt_digg a:link, .pt_digg a:visited, .pt_mail a:link, .pt_mail a:visited, .pt_discuss a:link, .pt_discuss a:visited { color: #eef1f4; text-decoration: none; }.pt_digg a:hover, .pt_digg a:active, .pt_mail a:hover, .pt_mail a:active, .pt_discuss a:hover, .pt_discuss a:active { color: #fff; }.post_more {	font-size: 10px;	font-weight: bold;}.post_more a:link, .post_more a:visited {	padding: 0 8px 0 0 !important;	background: url('http://cache.macnn.com/macnn/_images/post_arrow_more0.gif') right 3px no-repeat;	color: #002c66 !important;	text-decoration: none;}.post_more a:hover, .post_more a:active {	color: #0066aa !important;	text-decoration: none;	background: transparent url('http://cache.macnn.com/macnn/_images/post_arrow_more1.gif') right 3px no-repeat !important;}/*  sub-module, software updates, forum roundup, etc.  */.post_sm {	margin: 0 24px 0 20px;	padding: 0 0 16px 0;/*	float: left;*/}.post_sm_hd {	margin: 0 0 0 10px;	padding: 0;}.post_sm_top {	width: 443px;	margin: 0;	padding: 0;	background: url('http://cache.macnn.com/macnn/_images/cnt_submodule_top.gif') left 8px no-repeat}.post_sm_top h2 { color: #222; font-weight: normal; padding: 2px 0 0 0 !important; margin: 0; }.post_sm_top ul { margin: 0 0 0 10px; padding: 14px 0 0 0; }.post_sm_top li { margin: 0 10px 0 0; padding: 3px 0; list-style-type: none; }.post_sm_top p { font-size: 11px; line-height: 12px; margin: 0 6px 0 0 !important; padding: 2px 0 0 0 !important; }.post_sm_h2 { float: right; font-weight: normal; }.post_sm_img {	float: right;	margin: 3px 0 0 4px;}.ie8 .post_sm_img,.ie7 .post_sm_img, .ie6 .post_sm_img {margin: 3px 0 0 0px;}.post_sm_btm {	width: 443px;	height: 10px;	margin: 0;	padding: 0;	background: url('http://cache.macnn.com/macnn/_images/cnt_submodule_btm.gif') left top no-repeat	}/*  submodule wide (600px) for containers like refining search, etc.  */.post_smw {	margin: /*0 24px*/ 0 20px;	padding: 0 0 16px 0;}.post_smw p, .post_smw form {	margin: 0 10px;	padding: 0;}.post_smw input {	margin: 0;	padding: 1px;}/*added by mike*/td.inactive a:link, td.inactive a:active, td.inactive a:visited{font-size:12px;color:#456186;margin:0px 0px 0px 0px;height:19px;padding-left:5px;}td.inactive a:hover{background:url('http://cache.macnn.com/macnn/_images/digg_r3_c1.jpg');color:#f4f4f4;}td.digg a:link, td.digg a:active, td.digg a:visited{font-size:11px;color:#ffffff;margin:0px 0px 0px 0px;height:19px;padding-left:5px;}td.digg a:hover{background:url('http://cache.macnn.com/macnn/_images/digg_r1_c2.jpg');}/*added by mike ends*/.post_smw td {	margin: 0;	padding: 0 0 4px 0;}.post_smw_top {	width: 600px;	margin: 0;	padding: 10px 0 0 0;	background: url('http://cache.macnn.com/macnn/_images/cnt_submodule600_top.gif') left top no-repeat}.post_smw_btm {	width: 600px;	height: 10px;	margin: 0;	padding: 0;	background: url('http://cache.macnn.com/macnn/_images/cnt_submodule600_btm.gif') left top no-repeat	}.tbl_date, .tbl_submit {	padding: 0;	margin: 5px 0 0 0;}.tblsep { border-left: 1px solid #d6d6d6; }.tblsep select { font-size: 10px; }#year01 { margin-left: 2px; }#year02 { margin-left: 16px; }.gecko #year02 { margin-left: 18px; }#year01, #month01, #day01, #year02, #month02, #day02 { width: 22px; text-align: center; }#labelFrom { margin: 0 4px 0 0; }#labelTo { margin: 0 17px 0 0; }.mac.gecko #labelTo { margin: 0 18px 0 0; }.win #labelTo { margin: 0 16px 0 0; }.post h1 img { margin: 0 0 0 6px; border: none; }/*  previous news  */#newsprev {	}.prev-container {	margin: 0;	padding: 16px 0 0 0;	background: url('http://cache.macnn.com/macnn/_images/content_mod_ctr.png') left top repeat;}.ie6 .prev-container {
+background: url('http://cache.macnn.com/macnn/_images/content_mod_ctr_ie6.gif') left top repeat;
+}/*  @end  *//*  @group content area, left column, article pages  *//*  article text  */.art-col { width: 98%; line-height:140%; }.art-col p { margin: 13px 10px 0 0; padding: 0; }.art-col p a:link, .art-col p a:visited, .post h2 a,.post ul li a { color: #0066aa; padding: 0 1px; }.art-col p a:hover, .art-col p a:active, .post h2 a:hover,.post ul li a:hover { color: #0066aa; background: #ffda00; text-decoration: none; } .bodylinks{color: #0066aa; padding: 0 1px; }.bodylinks:hover{color: #0066aa; background: #ffda00; text-decoration: none;}/*  article, intro text  */.art-intro {	font-weight: bold;	color: #222;	display: block;	margin-top: 6px;
+	margin-bottom:8px;}/*  article ad 300x250  */.art-ad {	width: 300px;	margin: 10px 0 8px 16px;	padding: 0;	float: right;}/*  article, meta info inside ad container (art-ad)  */.art-meta {	width: 100%;	margin: -6px 0 0 0;	padding: 0;	text-align: left;}.art-meta a:link, .art-meta a:visited {	color: #0066aa; margin: 0 150px 0 0; padding: 0 1px; text-decoration: none;}.art-meta a:hover, .art-meta a:active {	color: #0066aa; background: #ffda00; text-decoration: none;}.art-meta ul {	list-style-type: none;	margin: 4px 0 8px 0;	padding: 0;}.art-meta li {	font-size: 10px;	line-height: 13px;	color: #888;}/*  article, mini gallery inside ad container (art-ad)  */.art-minig {	width: 100%;	text-align: center;	margin: 4px 0 0 0;	padding: 0;}/*  linkage for article bylines  */.byline { width: 100%; margin-top:8px; display: block; }.byline a:link, .byline a:visited { color: #0066aa; padding: 0 1px; text-decoration: none; }.byline a:hover, .byline a:active { color: #0066aa; background: #ffda00; text-decoration: none; }/*  article tool font size TOP  */.art-tool-fs { float: right; margin: 2px 0 0 0; }.art-tool-fs-l { width: 17px; height: 15px; background: url('http://cache.macnn.com/macnn/_images/btn_rating_left0.gif') left top no-repeat; }.art-tool-fs-l:hover { background: url('http://cache.macnn.com/macnn/_images/btn_rating_left1.gif') left top no-repeat; }.art-tool-fs-c {	height: 15px;	margin: 0 1px;	padding: 0 4px;	background: #516c8d;	font-size: 9px;	color: #e5e9ee;	text-align: center;	line-height: 16px;	font-family: Helvetica, Arial, sans-serif;}.mac.gecko .art-tool-fs-c { height: 13px; padding: 2px 4px 0 4px; line-height: 14px; }.art-tool-fs-r { width: 17px; height: 15px; background: url('http://cache.macnn.com/macnn/_images/btn_rating_right0.gif') left top no-repeat; }.art-tool-fs-r:hover { background: url('http://cache.macnn.com/macnn/_images/btn_rating_right1.gif') left top no-repeat; }.art-tool-fs-l, .art-tool-fs-c, .art-tool-fs-r { float: left; }/*  article tools  */.art-tools {	width: 100%;	margin: 12px 0 0 0;	display: block;	font-size: 9px;	line-height: 14px;	text-align: right;	font-family: Helvetica, Arial, sans-serif;}.gecko .art-tools { line-height: 15px; }.win.gecko .art-tools { line-height: 14px; }.art-tools-mail, .art-tools-print, .art-tools-share, .art-tools-comments { height: 14px; margin: 0 4px 0 0; float: left; }.art-tools-mail { width: 57px; background: url('http://cache.macnn.com/macnn/_images/art-tool_bg-mail0.gif') left top no-repeat; }.art-tools-mail:hover { background: url('http://cache.macnn.com/macnn/_images/art-tool_bg-mail1.gif') left top no-repeat; }.art-tools-print { width: 51px; background: url('http://cache.macnn.com/macnn/_images/art-tool_bg-print0.gif') left top no-repeat; }.art-tools-print:hover { background: url('http://cache.macnn.com/macnn/_images/art-tool_bg-print1.gif') left top no-repeat; }.art-tools-share { width: 56px; background: url('http://cache.macnn.com/macnn/_images/art-tool_bg-share0.gif') left top no-repeat; float: right; text-align: center !important; }.art-tools-share:hover { background: url('http://cache.macnn.com/macnn/_images/art-tool_bg-share1.gif') left top no-repeat; }.art-tools-comments { width: 95px; background: url('http://cache.macnn.com/macnn/_images/art-tool_bg-comments0.gif') left top no-repeat;}.art-tools-comments:hover { background: url('http://cache.macnn.com/macnn/_images/art-tool_bg-comments1.gif') left top no-repeat; }.art-tools-mail a, .art-tools-print a, .art-tools-comments a { padding: 0 6px 0 16px; }.art-tools-share a:link { padding: 0 !important; }.art-tools-mail a:link, .art-tools-mail a:visited, .art-tools-print a:link, .art-tools-print a:visited, .art-tools-share a:link, .art-tools-share a:visited, .art-tools-comments a:link, .art-tools-comments a:visited { color: #eef1f4; text-decoration: none; }.art-tools-mail a:hover, .art-tools-mail a:active, .art-tools-print a:hover, .art-tools-print a:active, .art-tools-share a:hover, .art-tools-share a:active, .art-tools-comments a:hover, .art-tools-comments a:active { color: #fff; }/*  related articles  */.art-related {	margin: 22px 0 0 0;}.art-related ul {	margin: 6px 0 0 0;	padding: 0;	list-style-type: none;}.art-related li {	margin: 0;	padding: 0 0 0 10px;	background: url('http://cache.macnn.com/macnn/_images/list_bullet.gif') 1px 2px no-repeat;}.art-related a:link, .art-related a:visited {	display: block; color: #0066aa; margin: 0 150px 0 0; padding: 0 1px; text-decoration: none;}.art-related a:hover, .art-related a:active {	color: #0066aa; background: #ffda00; text-decoration: none;}/*  add a comment  */#commentform form {	margin: 0;	padding: 0;}#cmt-title {	width: 50%;	margin: 16px 0 0 0;	padding: 2px;	border: 1px solid #999;	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;	font-size: 12px;	line-height: 15px;}#cmt-text {	width: 98%;	height: 200px;	margin: 10px 0 0 0;	padding: 2px;	border: 1px solid #999;	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;	font-size: 12px;	line-height: 15px;}.safari #cmt-text {	resize: none;} #subject {
+	width: 50%;
+	margin: 16px 0 0 0;
+	padding: 2px;
+	border: 1px solid #999;
+	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 15px;
+}
+
+
+#comment {
+	width: 98%;
+	height: 200px;
+	margin: 10px 0 0 0;
+	padding: 2px;
+	border: 1px solid #999;
+	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 15px;
+}
+.subjectclass {
+	width: 50%;
+	margin: 16px 0 0 0;
+	padding: 2px;
+	border: 1px solid #999;
+	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 15px;
+}
+
+
+.commentclass {
+	width: 98%;
+	height: 200px;
+	margin: 10px 0 0 0;
+	padding: 2px;
+	border: 1px solid #999;
+	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 15px;
+}
+.safari #cmt-text {
+	resize: none;
+} #cmt-btns { width: 99%; height: 20px; margin: 10px 0 0 0; }#cmt-preview, #cmt-submit, #cmt-cancel, #cmt-logout { font-size: 11px; }#cmt-submit { font-weight: bold; }/*  previous comments, left column  */.prv-cmt-left {	width: 438px;	margin: 0 6px 0 0;	padding: 0 6px 0 0;	border-right: 1px solid #bfbfbf;	float: left; min-height:90px;}.prv-cmt-date {	float: right;	margin: 0 6px 0 0;	padding: 2px 0 0 0;	font-weight: normal;}.prv-cmt-date a:link, .prv-cmt-date a:visited { color: #0066aa; padding: 0 1px; text-decoration: none; }.prv-cmt-date a:hover, .prv-cmt-date a:active { color: #0066aa; background: #ffda00; text-decoration: none; }.prv-cmt-txt {	display: block;	clear: both;	margin: 0;	padding: 3px 0 0 0;}/*  previous comments, right column  */.prv-cmt-right {	width: 134px;	margin: 0;	padding: 0;	float: right;}.prv-cmt-right h1 a:link, .prv-cmt-right h1 a:visited { color: #0066aa; padding: 0 1px; text-decoration: none; }.prv-cmt-right h1 a:hover, .prv-cmt-right h1 a:active { color: #0066aa; background: #ffda00; text-decoration: none; }.prv-cmt-right h2 { font-weight: normal; margin: 0 0 0 1px; }.prv-cmt-rank { padding: 8px 0 0 0; }/*  previous comments, right column, comment rating  */.prv-cmt-rating {	margin: 8px 0 0 1px;	padding: 0;}.prv-cmt-rating-l { width: 17px; height: 15px; background: url('http://cache.macnn.com/macnn/_images/btn_rating_left0.gif') left top no-repeat; }.prv-cmt-rating-l:hover { background: url('http://cache.macnn.com/macnn/_images/btn_rating_left1.gif') left top no-repeat; }.prv-cmt-rating-c {	height: 15px;	margin: 0 1px;	padding: 0 3px;	background: #516c8d;	font-size: 9px;	color: #e5e9ee;	text-align: center;	line-height: 16px;	font-family: Helvetica, Arial, sans-serif;}.gecko .prv-cmt-rating-c { line-height: 15px; }.prv-cmt-rating-r { width: 17px; height: 15px; background: url('http://cache.macnn.com/macnn/_images/btn_rating_right0.gif') left top no-repeat; }.prv-cmt-rating-r:hover { background: url('http://cache.macnn.com/macnn/_images/btn_rating_right1.gif') left top no-repeat; }.prv-cmt-rating-l, .prv-cmt-rating-c, .prv-cmt-rating-r { float: left; }/*  review ratings  */.rev_rating_1 {	width: 66px;	height: 14px;	float: right;	margin: 0 6px 0 0;	padding: 0;	background: url('http://cache.macnn.com/macnn/_images/reviews_rating_1.gif') left top no-repeat;}.rev_rating_2 {	width: 66px;	height: 14px;	float: right;	margin: 0 6px 0 0;	padding: 0;	background: url('http://cache.macnn.com/macnn/_images/reviews_rating_2.gif') left top no-repeat;}.rev_rating_3 {	width: 66px;	height: 14px;	float: right;	margin: 0 6px 0 0;	padding: 0;	background: url('http://cache.macnn.com/macnn/_images/reviews_rating_3.gif') left top no-repeat;}.rev_rating_4 {	width: 66px;	height: 14px;	float: right;	margin: 0 6px 0 0;	padding: 0;	background: url('http://cache.macnn.com/macnn/_images/reviews_rating_4.gif') left top no-repeat;}.rev_rating_5 {	width: 66px;	height: 14px;	float: right;	margin: 0 6px 0 0;	padding: 0;	background: url('http://cache.macnn.com/macnn/_images/reviews_rating_5.gif') left top no-repeat;}/*  @end  *//*  @group content area, sidebar  */#sidebar {	width: 360px;	float: left;}/*  notification area, RIGHT  */#ntf-r {	width: 340px;	height: 30px;	margin: 2px 0 10px 10px;	padding: 0;	background: url('http://cache.macnn.com/macnn/_images/ntf_right_bg.png') left top no-repeat;	font-size: 10px;	line-height: 10px;}.win #ntf-r { font-size: 11px; }#ntf-text-r {	margin: 0;	padding: 11px 0 0 10px;	font-weight: bold;	color: #566882;	text-shadow: #fff 0 1px 2px;}.sb-mod-hd {	width: 360px;	height: 36px;	background: url('http://cache.macnn.com/macnn/_images/sb_mod_hd.png') left top no-repeat;}.ie6 .sb-mod-hd { background: url('http://cache.macnn.com/macnn/_images/sb_mod_hd_ie6.gif') left top no-repeat; }/*  sidebar, content module, center  */.sb-mod-cnt {	padding: 8px 0 0 0;	background: url('http://cache.macnn.com/macnn/_images/sb_mod_ctr.png') left top repeat;}.ie6 .sb-mod-cnt { background: url('http://cache.macnn.com/macnn/_images/sb_mod_ctr_ie6.gif') left top repeat; }/*  sidebar, content module, center WITH TABS  */.sb-mod-cnt-tabs {	background: url('http://cache.macnn.com/macnn/_images/sb_mod_ctr_tabs.png') left top no-repeat; padding:0px 0 0px 0; height:auto;	}.ie6 .sb-mod-cnt-tabs { background: url('http://cache.macnn.com/macnn/_images/sb_mod_ctr_tabs_ie6.gif') left top no-repeat; }/*  sidebar, content module, footer  */.sb-mod-ft {	height: 16px;	background: url('http://cache.macnn.com/macnn/_images/sb_mod_ft.png') left bottom no-repeat;}.ie6 .sb-mod-ft { background: url('http://cache.macnn.com/macnn/_images/sb_mod_ft_ie6.gif') left bottom no-repeat; }.ie .sb-mod-ft { height:auto;}/*  generic INNER CONTAINER  */.sbmod-container {	margin: 0px 20px 0px 20px;	padding: 10px 0 8px 0;}
+.ie .sbmod-container { padding: 6px 0 2px 0; }
+
+/*  container for 300x250 AD  */.sb-ad-sq-bg {	width: 300px;	height: 250px;	margin: 0 0 0 28px;	padding: 1px;	background: #ccc;}.ie .sb-ad-sq-bg { margin: 0; padding: 0 0 0 28px; background: none; }/*  HOT TOPICS dates  */.ht-date {	width: 40px;	height: 14px;	padding: 0;	margin: 3px 4px 0 0;	float: left;	clear: left;	font-size: 11px;}.ht-date1 {	width: 40px;	height: 14px;	padding: 0;	margin: 3px 4px 0 0;	float: left;	clear: left;	font-size: 11px;}/*  HOT TOPICS headlines  */.ht-headl {	width: 276px;	height: 14px;	padding: 0;	margin: 3px 0 0 0;	float: left;	font-size: 11px;}.ht-headl a:link, .ht-headl a:visited { color: #0066aa; text-decoration: none; /*font-weight: bold;*/ display: block; }/*.ht-headl a:hover, .ht-headl a:active { color: #002c66; text-decoration: underline; }*/.ht-headl a:hover, .ht-headl a:active { color: #0066aa; background: #ffda00; text-decoration: none; }.ie .ht-headl a { display: inline; }.ht-head2 {	width: 396px;	height: 14px;	padding: 0;	margin: 3px 0 0 0;	float: left;	font-size: 11px;}.ht-head2 a:link, .ht-head2 a:visited { color: #0066aa; text-decoration: none; /*font-weight: bold;*/ display: block; }/*.ht-head2 a:hover, .ht-head2 a:active { color: #002c66; text-decoration: underline; }*/.ht-head2 a:hover, .ht-head2 a:active { color: #0066aa; background: #ffda00; text-decoration: none; }.ie .ht-headl a { display: inline; }/*  sidebar module top ten & skyscraper ad  */.ad-skyscr {	width: 160px;	height: 600px;	float: right;	margin: 0;	padding: 0;}#tt-txt {	width: 150px;	float: left;	margin: 0;	padding: 0;	font-size: 11px;	line-height: 13px;}#tt-txt ul {	margin: 0;	padding: 2px 0 0 0;	list-style-type: none;	clear: both;}#tt-txt li {	margin: 4px 0 0 1px;	padding: 0;}#tt-txt a:link, #tt-txt a:visited { color: #0066aa; text-decoration: none; display: block; }.ie #tt-txt a { display: inline; }/*#tt-txt a:hover, #tt-txt a:active { color: #002c66; text-decoration: underline; }*/#tt-txt a:hover, #tt-txt a:active { color: #0066aa; background: #ffda00; text-decoration: none; }.tt-rss {	width: 12px;	height: 12px;	float: right;	background: url('http://cache.macnn.com/macnn/_images/tt_rss0.gif') left top no-repeat;}.tt-rss:hover { background: url('http://cache.macnn.com/macnn/_images/tt_rss1.gif') left top no-repeat; }.tt-rss a:hover, .tt-rss a:active { background: none !important; }/*  recent reviews  */.sbmod-container-rv {	margin: 0 20px;	padding: 0;	font-size: 11px;	line-height: 13px;}.sbmod-container-rv img { float: right; margin: 0 0 6px 3px; padding: 0; }.sbmod-container-rv p { margin: 3px 0 0 0; padding: 0; }.sbmod-container-rv h1 { font-size: 13px; line-height: 13px; margin: 0; padding: 3px 0 0 0; }.sbmod-container-rv .post_more { margin: 2px 0 0 0; padding: 0; }/*  @end  *//*  @group footer  */#footer {	background: #737475 url('http://cache.macnn.com/macnn/_images/footer_bg.gif') left top repeat-x;}#footerleft {	width: 580px;	height: 294px;	float: left;	margin: 8px 0 0 0;	padding: 52px 30px 0 30px;	background: url('http://cache.macnn.com/macnn/_images/footer_bg_left.gif') 10px 32px no-repeat;	line-height: 15px;}#footerleft ul { margin: 0; padding: 3px 0 0 0; list-style-type: none; }#footerleft li { display: block; margin: 3px 0 0 0; padding: 0; }#footerleft a:link, #footerleft a:visited { display: block; padding: 0 1px; font-weight: bold; color: #002c66; text-decoration: none; }.ie #footerleft a:link, .ie #footerleft a:visited { display: inline; }#footerleft a:hover, #footerleft a:active { color: #0066aa; background: #ffda00; text-decoration: none; }#footerleft .regtxt { color: #000 !important; text-decoration: none; font-weight: normal; }.ie #footerleft li { font-size: 11px; }.win #footerleft { font-size: 11px; }#last { display: inline; float: right; font-size: 11px; display: block; text-align: right; }#footerright {	width: 330px;	height: 294px;	float: left;	margin: 8px 0 0 0;	padding: 52px 0 0 30px;	background: url('http://cache.macnn.com/macnn/_images/footer_bg_right.gif') 10px 32px no-repeat;}#footcpy {	width: 540px;	height: 15px;	margin: 0 0 20px 30px;	padding: 0;	float: left;	color: #b4b5b7;	font-family: Helvetica, Arial, sans-serif;}#footcrd {	width: 280px;	height: 15px;	margin: 0 30px 20px 0;	padding: 0;	float: right;	text-align: right;	color: #b4b5b7;	font-family: Helvetica, Arial, sans-serif;}#footcrd a:link, #footcrd a:visited { color: #b4b5b7; text-decoration: underline; }#footcrd a:hover, #footcrd a:active { color: #ffda00; text-decoration: none; }/*  @end  *//* @group misc. shit *//*  clears floats, leave alone!  */.clearall { font-size: 0.1px; line-height: 0.1px; display: block; clear: both; }/*  blue pill "show all"  */.showall { width: 58px; height: 15px; float: right; margin: 0px 5px 0 0; padding: 0; background: url('http://cache.macnn.com/macnn/_images/showall0.gif') left top no-repeat; }.ie6 .showall { margin: 4px 12px 0 0; }.ie8 .showall,.ie7 .showall { margin: 4px 26px 0 0; }.showall:hover { background: url('http://cache.macnn.com/macnn/_images/showall1.gif') left top no-repeat; }/*  blue pill "show all" for "hot topics in SIDEBAR"  */.sb-showall { width: 58px; height: 15px; float: right; margin: 10px 5px 0 0; padding: 0; background: url('http://cache.macnn.com/macnn/_images/showall0.gif') left bottom no-repeat; }.ie6 .sb-showall { margin: 4px 12px 0 0; }.ie7 .sb-showall,.ie8 .sb-showall { margin: 4px 26px 0 0; }.sb-showall:hover { background: url('http://cache.macnn.com/macnn/_images/showall1.gif') left bottom no-repeat; }/*  blue pill "show all" for "SMALL hot topics in SIDEBAR"  */.sb-showall2 { width: 58px; height: 15px; float: right; margin: 9px 5px 0 0; padding: 0; background: url('http://cache.macnn.com/macnn/_images/showall0.gif') left bottom no-repeat; }.gecko .sb-showall2 { margin: 9px 5px 0px 0; }.ie6 .sb-showall2 { margin: 7px 12px 0px 0; }.ie7 .sb-showall2,.ie8 .sb-showall2 { margin: 7px 26px 0px 0; }.sb-showall2:hover { background: url('http://cache.macnn.com/macnn/_images/showall1.gif') left bottom no-repeat; }/*  just a simple, horizontal white line for the main column  */.whiteline {	height: 1px;	overflow: hidden;	background: url('http://cache.macnn.com/macnn/_images/content_whiteline.png') left top no-repeat;}.ie6 .whiteline { background: url('http://cache.macnn.com/macnn/_images/content_whiteline_ie6.gif') left top no-repeat; }/*  just a simple, horizontal white line for the sidebar column  */.sb-whiteline {	height: 1px;	overflow: hidden;	background: url('http://cache.macnn.com/macnn/_images/sb_whiteline.png') left top no-repeat;}.ie6 .sb-whiteline { background: url('http://cache.macnn.com/macnn/_images/content_whiteline_ie6.gif') left top no-repeat; }h1 { color: #222; font-family: Helvetica, Arial, sans-serif; }h1, h1 a:link, h1 a:visited {	margin: 0;	padding: 0;	font-size: 14px;	line-height: 16px;	color: #002c66;	text-decoration: none;}h1 a:hover, h1 a:active { color: #0066aa; }h2 {	margin: 0;	padding: 2px 0 0 0;	font-size: 10px;	line-height: 12px;	color: #888;	font-family: Helvetica, Arial, sans-serif;}h3 {	margin: 0;	padding: 0;	font-size: 12px;	line-height: 12px;	font-family: Helvetica, Arial, sans-serif;}h3 a:link, h3 a:visited { color: #0066aa; text-decoration: none; }h3 a:hover, h3 a:active { color: #0066aa; background: #ffda00; text-decoration: none; }.left { float: left; }.right { float: right; }.lightbold { color: #666; font-weight: bold; }.light { color: #666; }.gray { color: #222; }/*  page navigation  */#pagination {	height: 30px;	margin: 0 0 0 28px;	padding: 0 0 0 0;	font-family: Helvetica, Arial, sans-serif;	line-height: 14px;}.pag_current {	height: 16px;	margin: 0 2px;	display: inline;	padding: 2px 5px 1px 5px;	float: left;	background: #9cabbe;	color: #fff;	text-decoration: none;	font-size: 10px;	font-weight: bold;	text-align: center;}.gecko .pag_current { padding: 3px 5px 0 5px; }.win .pag_current { padding: 1px 5px 2px 5px; }/*  links inside page navigation  */.pag_link a:link, .pag_link a:visited {	height: 16px;	margin: 0 2px 0 2px;	padding: 2px 5px 1px 5px;	background: #456286;	float: left;	color: #fff;	text-decoration: none;	font-size: 10px;/*	font-weight: bold;*/	text-align: center;}.gecko #pagination a:link, .gecko #pagination a:visited { padding: 3px 5px 0 5px; }.win #pagination a:link, .win #pagination a:visited { padding: 1px 5px 2px 5px; }/*#pagination a:hover, #pagination a:active {*/.pag_link a:hover, .pag_link a:active {	background: #ffda00;	color: #32465e;	text-decoration: none;}#query {	width: 50%;	margin: 0 0 0 6px;	padding: 0 0 0 2px;	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;	color: #222;}.mac.gecko #query { padding: 2px 0 0 2px; }.safari #query { padding: 4px 0 0 2px; }.ie #query { padding: 2px 0 0 2px; }.tbl_check, .tbl_check input, .button {	font-size: 11px !important;}/*  IE6 fix for transparent PNGs, leave alone!  */.ie6 #nav-p_home, .ie6 .breaking_img img, #nav-p, #nav-p li, #nav-p img { behavior: url('_scripts/iepngfix.htc'); }/* @end *//* STYLES ADDED BY HEXAGON DURING DEVELOPMENT *//*  secondary navigation, link items  */.snav_c a:link, .snav_c a:visited {	margin: 0 8px 0 0;	padding: 3px 0;	color: #072c5c;	text-decoration: none;	text-shadow: #8e7a00 0px 1px 4px;}.snav_c a:hover, .snav_c a:active { color: #fff; text-shadow: #8e7a00 0px 1px 4px; }/*  @end  */.main-mod-cnt {	padding: 16px 0 0 0;	background: url('http://cache.macnn.com/macnn/_images/content_mod_ctr.png') left top no-repeat;}.ie6 .main-mod-cnt { background: url('http://cache.macnn.com/macnn/_images/content_mod_ctr_ie6.gif') left top no-repeat; }/*  blue pill "show all"  */.showall { width: 58px; height: 15px; float: right; margin: 0px 5px 0 0; padding: 0; background: url('http://cache.macnn.com/macnn/_images/showall0.gif') left top no-repeat; }.ie6 .showall { margin: 0px 5px 0 0; }.ie7 .showall,.ie8 .showall { margin: 4px 26px 0 0; }.showall:hover { background: url('http://cache.macnn.com/macnn/_images/showall1.gif') left top no-repeat; }.sbmod-container1 {	margin: 0 20px;	padding: 10px 0 8px 0;	height: 139px;}/*  blue pill "show all" for "SMALL hot topics in SIDEBAR"  */.sb-showall2 { width: 58px; height: 15px; float: right; margin: 9px 5px 0 0; padding: 0; background: url('http://cache.macnn.com/macnn/_images/showall0.gif') left bottom no-repeat; }.gecko .sb-showall2 { margin: 0px -65px 0px 0; }.ie6 .sb-showall2 { margin: 0px -65px 0px 0; }.ie7 .sb-showall2,.ie8 .sb-showall2 { margin: 0px -65px 0px 0; }.sb-showall2:hover { background: url('http://cache.macnn.com/macnn/_images/showall1.gif') left bottom no-repeat; }.post_headlines p {	margin: 0 6px 0 0;	padding: 4px 4px 0 30px;	}.post_headlines p a:link, .post_headlines p a:visited { color: #0066aa; padding: 0 1px; }.post_headlines p a:hover, .post_headlines p a:active { color: #0066aa; background: #ffda00; text-decoration: none; }.post_headlines  {	margin: 0 6px 0 0;	padding: 4px 4px 0 30px;	}.post_headlines  a:link, .post_headlines p a:visited { color: #0066aa; padding: 0 1px; }.post_headlines  a:hover, .post_headlines p a:active { color: #0066aa; background: #ffda00; text-decoration: none }.post_headline{	margin: 0;	padding: 4px 6px 0 0;}.ie .line-break { 	padding-top: 5px;}.h2 {	margin: 0;	padding: 2px 0 0 0;	font-size: 10px;	line-height: 12px;	color: #888;	font-family: Helvetica, Arial, sans-serif;}#paddingfix{padding:0px;}.ie8 #paddingfix,.ie7 #paddingfix, .ie6 #paddingfix{padding-bottom:4px;}.ie8 .paddingfix2,.ie7 .paddingfix2,.ie6 .paddingfix2{padding-bottom:0px;}
+#form-comment
+{
+font-size:12px;
+}
+.greyall
+{
+display:none;
+color:#333333;
+font-size:10px;
+font-style:italic;
+}
+.greyitalic
+{
+color:#333333;
+font-style:italic;
+}
+
+.fadehotstories
+{
+width:400px; margin-top:2px;
+}
+.ie6 .fadehotstories, .ie7 .fadehotstories
+{
+margin-top:13px;
+background:transparent;
+}
+#notifybg
+{
+background: url('http://cache.macnn.com/macnn/_images/Notification_bg.png') right no-repeat; 
+width:980px;
+height:30px;
+line-height:30px;
+vertical-align:middle;
+margin-left:10px;
+margin-right:10px;
+margin-bottom:14px;
+font-weight: bold;	text-shadow: #fff 0 1px 2px; text-decoration:none;color: #002c66;
+font-size:10px;
+}
+#notifybg a
+{
+font-weight: bold;	text-shadow: #fff 0 1px 2px; text-decoration:underline;color: #002c66;
+}
+#notifybg a:hover
+{
+font-weight: bold;	text-shadow: #fff 0 1px 2px; text-decoration:none;color: #002c66;
+}
+.win #notifybg
+{
+font-size:11px;
+}
+#notifyleft
+{
+background: url('http://cache.macnn.com/macnn/_images/notification_title_bg.png') left no-repeat; 
+float:left;
+height:30px;
+line-height:30px;
+vertical-align:middle;
+padding-left:20px;
+padding-right:13px;
+}
+#notifydivider
+{
+background: url('http://cache.macnn.com/macnn/_images/Divider.png') left no-repeat; 
+width:2px;
+float:left;
+height:30px;
+}
+.ie6 #notifybg
+{
+background: url('http://cache.macnn.com/macnn/_images/Notification_bg_ie6.gif') right no-repeat; 
+}
+.ie6 #notifyleft
+{
+background: url('http://cache.macnn.com/macnn/_images/notification_title_bg_ie6.gif') left no-repeat; 
+}
+.ie6 #notifydivider
+{
+background: url('http://cache.macnn.com/macnn/_images/Divider_ie6.gif') left no-repeat; 
+}
+#yesterday_thumbnail h2 a:link,#yesterday_thumbnail h2 a:visited,#last_3_days_thumbnail h2 a:link,#last_3_days_thumbnail h2 a:visited,#archive_thumbnail h2 a:link,#archive_thumbnail h2 a:visited,#breaking2 h2 a:link,#breaking2 h2 a:visited  { color:#888888;}
+#yesterday_thumbnail h2 a:hover,#yesterday_thumbnail h2 a:active,#last_3_days_thumbnail h2 a:active,#last_3_days_thumbnail h2 a:hover,#archive_thumbnail h2 a:hover,#archive_thumbnail h2 a:active,#breaking2 h2 a:hover,#breaking2 h2 a:active { text-decoration:none; background:none;}
+.left50 { width: 50%; float: left; }
+.right50 { width: 50%; float: right; }
+#art-review {
+	margin: 3px 0 0 0;
+	padding: 0;
+}
+
+#art-review ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 10px;
+	line-height: 14px;
+	color: #7c7c7c;
+}
+
+#art-review li {
+	margin: 0;
+	padding: 0 4px 0 13px;
+}
+
+#art-review h1 { color: #666; font-size: 10px; line-height: 14px; font-weight: bold; margin: 3px 0 0 0; padding: 0; }
+#art-review h2 { color: #666; font-size: 10px; line-height: 14px; font-weight: bold; margin: 3px 0 0 0; padding: 0; }
+#art-review a { text-decoration: none; }
+#art-review a:link, #art-review a:visited { color: #0066aa; text-decoration: none; }
+#art-review a:hover, #art-review a:active { color: #0066aa; text-decoration: none; background: #ffda00; }
+
+.rv-rating {height: 14px; float: left; margin: 2px 0 0 4px; padding: 0; }
+
+.rv_good { background: url('http://cache.macnn.com/macnn/_images/reviews_icon_good.gif') left 2px no-repeat; }
+.rv_bad { background: url('http://cache.macnn.com/macnn/_images/reviews_icon_bad.gif') left 2px no-repeat; }
+
+#nohover a:hover { background:none; }
+/*styles screen ends*/
+/* styles dropdown*/
+
+
+/*  drop-down menus, all  */
+.ddy, .ddb {
+	width: 188px;
+	font-size: 11px;
+	line-height: 11px;
+	text-align: left;
+}
+.win .ddy, .win .ddb { font-size: 10px; line-height: 10px; }
+
+.ddy a, .ddb a { display: block; }
+.ie6 .ddy a, .ie6 .ddb a { display: inline; }
+
+.ddy-top ul, .ddb-top ul { margin: 0 20px; padding: 22px 0 0 0; }
+.ddy-top li, .ddb-top li { margin: 0; padding: 0; list-style-type: none; }
+
+/*  drop-down menu yellow  */
+.ddy {}
+
+.ddy-top {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	background: url(http://cache.macnn.com/macnn/_images/dd_menu_yellow_bg_top.png) left top no-repeat;
+	font-weight: bold;
+}
+.ie6 .ddy-top { background: url(http://cache.macnn.com/macnn/_images/dd_menu_yellow_bg_top_ie6.gif) left top no-repeat; }
+
+.ddy-btm {
+	height: 21px;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	background: url(http://cache.macnn.com/macnn/_images/dd_menu_yellow_bg_btm.png) left top no-repeat;
+	font-size: 1px;
+	line-height: 1px;
+}
+.ie6 .ddy-btm { background: url(http://cache.macnn.com/macnn/_images/dd_menu_yellow_bg_btm_ie6.gif) left top no-repeat; }
+
+.ddy-top a:link, .ddy-top a:visited { padding: 2px; color: #153864; text-decoration: none; }
+.ddy-top a:hover, .ddy-top a:active { color: #ffda00; background: #153864; text-decoration: none; }
+
+
+/*  drop-down menu blue  */
+.ddb {}
+
+.ddb-top {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	background: url(http://cache.macnn.com/macnn/_images/dd_menu_blue_bg_top.png) left top no-repeat;
+	font-weight: bold;
+}
+.ie6 .ddb-top { background: url(http://cache.macnn.com/macnn/_images/dd_menu_blue_bg_top_ie6.gif) left top no-repeat; }
+
+.ddb-btm {
+	height: 21px;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	background: url(http://cache.macnn.com/macnn/_images/dd_menu_blue_bg_btm.png) left top no-repeat;
+	font-size: 1px;
+	line-height: 1px;
+}
+.ie6 .ddb-btm { background: url(http://cache.macnn.com/macnn/_images/dd_menu_blue_bg_btm_ie6.gif) left top no-repeat; }
+/*
+.ddb-top a:link, .ddb-top a:visited { padding: 2px; color: #ffda00; text-decoration: none; }
+.ddb-top a:hover, .ddb-top a:active { color: #153864; background: #ffda00; text-decoration: none; }
+*/
+.ddb-top a:link, .ddb-top a:visited { padding: 2px; color: #fff; text-decoration: none; }
+.ddb-top a:hover, .ddb-top a:active { color: #153864; background: #fff; text-decoration: none; }
+/* styles dropdown ends */
+.post_headlines .ht-headl a:visited, .post_sm .ht-headl a:visited, #newsprev .ht-headl a:visited
+{
+color:#0000AA;
+}

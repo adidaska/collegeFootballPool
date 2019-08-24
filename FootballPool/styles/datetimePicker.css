@@ -1,0 +1,124 @@
+/****************************************************************************/
+/* Field Day Theme                                                          */
+/*                                                                          */
+/* Styles for the pop-up date and time pickers.                             */
+/****************************************************************************/
+
+#calendar,
+#clock
+{
+	background-color: #fffff0;
+	border: 2px solid #000000;
+	display: none;
+	padding: 8px;
+	padding-bottom: 0px;
+	position: absolute;
+	text-align: center;
+}
+
+#calendar table
+{
+	background-color: #ffffff;
+	border: 1px solid #000000;
+	border-collapse: collapse;
+}
+
+#calendar tr.monthHeader
+{
+	background-color: #208020;
+	background-image: url('../graphics/headerBg.jpg');
+	background-position: left bottom;
+	background-repeat: repeat-x;
+	color: #ffffff;
+}
+
+#calendar tr.monthHeader th
+{
+	border-bottom: 1px solid #000000;
+}
+
+#calendar a
+{
+	text-decoration: none;
+}
+
+#calendar tr.monthHeader a,
+#calendar tr.monthHeader a:active,
+#calendar tr.monthHeader a:visited,
+#calendar tr.monthHeader a:hover
+{
+	color: #ffff80;
+}
+
+#calendar tr.daysHeader
+{
+	background-color: #d0d0b0;
+}
+
+#calendar tr.daysHeader th
+{
+	border-bottom: 1px solid #000000;
+	color: #000000;
+	width: 1.5em;
+}
+
+#calendar td, #calendar th
+{
+
+	padding: 2px;
+}
+
+#calendar td
+{
+	text-align: right;
+}
+
+#calendar td.weekend
+{
+	background-color: #f0f0e0;
+}
+
+#calendar tr.dates a,
+#calendar tr.dates a:active
+#calendar tr.dates a:visited
+#calendar tr.dates a:hover
+{
+	color: #20a060;
+}
+
+#calendar tr.dates a.otherMonth,
+#calendar tr.dates a.otherMonth:active,
+#calendar tr.dates a.otherMonth:visited,
+#calendar tr.dates a.otherMonth:hover
+{
+	color: #a0c0b0;
+}
+
+#calendar td.selected
+{
+	background-color: #20a060;
+}
+
+#calendar td.selected a,
+#calendar td.selected a:active,
+#calendar td.selected a:visited,
+#calendar td.selected a:hover
+{
+	color: #ffffff;
+}
+
+#clock table
+{
+	border-collapse: collapse;
+}
+
+#clock table td
+{
+	padding: 2px;
+}
+
+input.activeDateTime
+{
+	border-color: #a0c0b0;
+	color: #a0c0b0;
+}

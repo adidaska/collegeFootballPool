@@ -1,0 +1,91 @@
+/****************************************************************************/
+/* Site menu styles.                                                        */
+/****************************************************************************/
+
+#menuBar,
+.menu
+{
+	background-color: #d0daf0;
+	border: 1px solid #204080;
+}
+
+#menuBar
+{
+	border-top: 0px none;
+	margin-bottom: 1em;
+}
+
+#menuBar a,
+.menu a
+{
+	display: block;
+	font-size: 9pt;
+}
+
+#menuBar table
+{
+	border-collapse: collapse;
+}
+
+#menuBar td
+{
+	border-right: 1px solid #204080;
+	padding: 0px;
+	text-align: left;
+}
+
+#menuBar a
+{
+	height: 100%;
+	padding: 2px 1.25em;
+}
+
+#menuBar a span.arrow
+{
+	font-size: 8pt;
+}
+
+#menuBar a.hasMenu:hover
+{
+	text-decoration: none;
+}
+
+.menu
+{
+	margin-left: -1px; /* Adjust to position menu under link. */
+	position: absolute;
+	visibility: hidden;
+	z-index: 1;
+}
+
+.menu a
+{
+	border: 1px solid #d0daf0;
+	margin: 2px .25em;
+	padding: 3px 1em;
+}
+
+#menuBar a:active,  .menu a:active,
+#menuBar a:hover,   .menu a:hover,
+#menuBar a:focus,   .menu a:focus,
+#menuBar a.ieFocus, .menu a.ieFocus /* For IE browsers. */
+{
+	background-color: #7080a0;
+	color: #ffffff;
+	outline: none 0px;
+}
+
+.menu a:active,
+.menu a:hover,
+.menu a:focus,
+.menu a.ieFocus /* For IE browsers. */
+{
+	border: 1px solid #204080;
+	outline: none 0px;
+}
+
+.menu .separator
+{
+	border-bottom: 1px solid #204080;
+	margin: 4px .5em;
+}

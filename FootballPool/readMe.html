@@ -1,0 +1,602 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>ASP Football Pool Read Me</title>
+	<style type="text/css">
+		body
+		{
+			background-color: #f0f0f0;
+			font-family: sans-serif;
+			margin: 0px;
+			padding: 0px;
+		}
+		#main
+		{
+			background-color: #fcfcfc;
+			border: 1px solid #c0c0c0;
+			border-width: 0px 2px;
+			margin: 0px auto;
+			padding: .5ex 2em;
+			width: 40em;
+		}
+		h1, h2, h3
+		{
+			color: #4084c0;
+		}
+		h2
+		{
+			text-decoration: underline;
+		}
+		code
+		{
+			color: #206030;
+			font-family: monospace;
+			font-size: 13pt;
+		}
+		.sampleCode
+		{
+			background-color: #fffff0;
+			color: #206030;
+			border: 2px solid #206030;
+			overflow: auto;
+			padding-left: 1em;
+		}
+		.errorMessage
+		{
+			border: 1px dotted #c0c0c0;
+			padding: 1em;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<h1>ASP Football Pool</h1>
+		<h3>Version 2.2</h3>
+
+		<p>Copyright 1999-2008 by <a href="http://www.brainjar.com">Mike Hall</a>.</p>
+
+		<h2>Contents</h2>
+
+		<ul>
+			<li><a href="#license">License and Disclaimer</a></li>
+			<li><a href="#description">Description</a></li>
+			<li><a href="#formats">Pool Formats</a></li>
+			<li><a href="#requirements">Requirements</a></li>
+			<li>
+				<a href="#setUp">How to Set Up Your Pool</a>
+				<ol>
+					<li><a href="#configureSettings">Configure Your Pool Settings</a></li>
+					<li><a href="#emailFunction">Code Your Email Function (Optional)</a></li>
+					<li><a href="#testConnection">Upload the Files and Test the Database Connection</a></li>
+					<li><a href="#testEmail">Test Your Email Function (Optional)</a></li>
+					<li><a href="#invitePlayers"> Invite Some Friends to Play</a></li>
+				</ol>
+			</li>
+			<li><a href="#releaseNotes">Release Notes</a></li>
+		</ul>
+
+		<h2><a name="license">License and Disclaimer</a></h2>
+
+		<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+		This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+		See the <a href="gpl.txt">GNU General Public License</a> for more details.</p>
+   
+		<p>You should have received a copy of the GNU General Public License along with this program.
+		If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+
+		<p>This software includes a copy of <a href="http://tinymce.moxiecode.com/">TinyMCE</a>, used under the GNU Library General Public License.
+		See the <a href="pgpl.txt">LGPL license</a> for more details.</p>
+
+		<h2><a name="description">Description</a></h2>
+
+		<p>This web application allows you to host a weekly pick'em football pool for your friends and acquaintances.
+		In addition, you can run a survivor pool, a margin pool or a combination of both.
+		It is designed to be easy to set up and run with minimal maintenance.
+		Some notable features:</p>
+
+		<ul>
+			<li>Options to use point spreads and/or confidence points.</li>
+			<li>Includes an optional pool covering the playoff games.</li>
+			<li>Has the option to run a survivor, margin or a combined pool on the side.</li>
+			<li>Password-protected access for users.</li>
+			<li>Easy, online sign up for players.</li>
+			<li>Entries may be made for weeks in advance.</li>
+			<li>Picks are automatically locked based on the game schedule.</li>
+			<li>For the survivor/margin pool, players are automatically prevented from using a team more than once.</li>
+			<li>Players can be prevented from seeing other's picks until games are locked.</li>
+			<li>Players may edit or delete their entries up until games are locked.</li>
+			<li>Administrator can modify player entries (even after games are locked).</li>
+			<li>Results are automatically updated as soon as game scores are entered by the Administrator.</li>
+			<li>Players can update their profiles to provide contact information for the Administrator.</li>
+			<li>Players may choose receive email notifications for different types of updates (game scores, scheduling changes, etc.).</li>
+			<li>Entry fees and pool winnings are automatically tracked.</li>
+			<li>Administrator can enter payment information and view account balances.</li>
+			<li>Players can view their own account history/balance and winnings.</li>
+			<li>Displays weekly and team schedules as well as division and conference standings.</li>
+			<li>Provides overall player statistics.</li>
+			<li>Optional message board for users, with rich text editing.</li>
+		</ul>
+
+		<p>A designated Administrator manages the pool: setting the point spreads (if used), entering game scores and updating the game schedule as necessary.
+		The Administrator also manages user accounts and can update the home page with news, announcements, etc.</p>
+
+		<h2><a name="formats">Pool Formats</a></h2>
+
+		<p>Here is a brief description of the available pools and options.</p>
+
+		<h3>Weekly Pool</h3>
+
+		<p>Each week, players enter by guessing the winner in each of the week's games.
+		Whoever scores the highest in that week wins.
+		Players are also asked to guess the total number of points that will be scored in the Monday Night game.
+		In the event of a tie, the player or players who guess closest to that total win.</p>
+
+		<p>You can choose to use point spreads, in which case players must pick teams to win against the spread, rather than straight up.</p>
+
+		<p>You can also choose to use confidence points, where players must rank each pick from one to however many games there are that week.
+		Players are scored by totaling the points assigned to each correct pick.</p>
+
+		<h3>Playoffs Pool</h3>
+
+		<p>This pool is similar to a weekly pool, except that it covers all the postseason games and there is no tiebreaker.
+		If point spreads and/or confidence points were used in the weekly pool, they will be used in the playoffs pool as well.</p>
+
+		<h3>Survivor Pool</h3>
+
+		<p>This pool is separate from the weekly pools and runs the length of the regular season.
+		Players are asked to pick a team each week and cannot use any team more than once.
+		If their team wins, they continue on to the next week.
+		If their team loses, they are eliminated.
+		The last player left standing wins.</p>
+
+		<p>Should all active players be eliminated in a given week, they are automatically reinstated and continue on to the next week.
+		If more than one player survives the entire season, the number of correct picks is used as a tiebreaker.</p>
+
+		<p>If desired, you can configure this pool to allow two or more losses before elimination.
+		You can also choose whether to count a tie game as a win or a loss.</p>
+
+		<h3>Margin Pool</h3>
+
+		<p>This pool is played much like the survivor pool: players try to pick a winning team each week and cannot use the same team more than once.
+		Unlike the survivor pool, however, players are not eliminated for losing picks.
+		Instead, the goal is pick the team that will win by the most points each week.</p>
+
+		<p>When a player's team wins, the number of points the team won by is added to his or her total.
+		When a team loses, the player's total is deducted by the number of points the team lost by.
+		The player with the highest total score at the end of the regular season wins.
+		Should two or more players tie for the highest score, the number of correct picks is used as a tiebreaker.</p>
+
+		<p>Optionally, you can choose not to deduct points for a losing pick.
+		Instead, the player will receive zero points for that week.</p>
+
+		<h3>Combined Survivor/Margin Pool</h3>
+
+		<p>You can also combine the survivor and margin pools.
+		Players pick one team each week and that team is used in both pools.
+		Players eliminated from the survivor pool can continue playing in the margin pool.</p>
+
+		<p>You can specify how to divide the pot between each pool.
+		For example, you might award 75% to the winner of the survivor pool and give the remaining 25% to the margin pool winner.</p>
+
+		<p><em>Note: By default, the survivor, margin or combined pool begins on the first week of the season.
+		You can set it to start on a later week, if desired.</em></p>
+
+		<p>The application includes a help page that explains the pool rules in more depth.
+		It is automatically tailored to cover the specific pool options you have set.
+		Be sure to read the special Administration sections before attempting to run a pool.</p>
+
+		<h2><a name="requirements">Requirements</a></h2>
+
+		<p>This application is designed to run on Internet Information Server (IIS) web servers, using Active Server Pages (ASP) and a Microsoft Access database.
+		To host it, your web server must support ASP and have the appropriate database drivers installed.</p>
+
+		<p>You may also need the ability to modify directory permissions on your site in order to allow updates to the database.
+		Check with your hosting provider to ensure your site meets these requirements.</p>
+
+		<p>Some ASP programming knowledge is required in order to use the email notification feature.
+		ASP has no built-in functionality for sending email.
+		However, most hosting services provide some facility for sending emails via script.
+		To make use of whatever your host provides, you will need to add the appropriate code <a href="#emailFunction">as described below</a>.</p>
+
+		<h2><a name="setUp">How to Set Up Your Pool</a></h2>
+
+		<p>Please carefully review all the following steps before attempting to install the Football Pool on your own web site.</p>
+
+		<h3><a name="configureSettings">1. Configure Your Pool Settings</a></h3>
+
+		<p>The <code>includes/common.asp</code> file contains several constant definitions that you need to customize.
+		The first section relates to your site.</p>
+
+		<pre class="sampleCode">
+'--------------------------------------------------------------------------
+' Site settings.
+'--------------------------------------------------------------------------
+
+'Site URL, used for the emails sent to users.
+const POOL_URL = "http://www.example.net/FootballPool"
+
+'Page title.
+const PAGE_TITLE = "2008 Football Pool"
+
+'Administrator email address.
+const ADMIN_EMAIL = "admin@example.net"
+
+'Flag indicating whether the server can send email or not.
+const SERVER_EMAIL_ENABLED = true
+
+'Sign up invitation code.
+const SIGN_UP_INVITATION_CODE = ""
+
+'Time zone difference between host server and database schedule (Eastern).
+const TIME_ZONE_DIFF = 0
+
+'Location of the database.
+const DATABASE_FILE_PATH = "./data/NFL.mdb"
+
+'Key used for encrypting private player data.
+const DATA_ENCRYPTION_KEY = "4k0s*b92mqld:pdw7d4sklda8adz@d{a"
+
+'Username session variable.
+const SESSION_USERNAME_KEY = "FootballPoolUsername"
+
+</pre>
+
+		<p><code><strong>POOL_URL</strong></code><br />
+		Set this to the web address of your pool.</p>
+
+		<p><code><strong>PAGE_TITLE</strong></code><br />
+		This is used on the top banner and title of all pages.
+		Each individual page also has a subtitle.</p>
+
+		<p><code><strong>ADMIN_EMAIL</strong></code><br />
+		Set this to the email address you'd like players to use to contact you.</p>
+
+		<p><code><strong>SERVER_EMAIL_ENABLED</strong></code><br />
+		Indicates whether email send capability is available or not.
+		If your host does not permit you to send email via ASP set this to <code>false</code>.
+		Note that email notifications will not be available in this case and there will be no email confirmation for user sign ups.</p>
+
+		<p><code><strong>SIGN_UP_INVITATION_CODE</strong></code><br />
+		You can use this to restrict user sign ups.
+		If left as an empty string, anyone may use the sign up page to create a user account.</p>
+
+		<p>To prevent just anyone from signing up, you can set this to a simple character string (e.g., a four-digit number, a password, etc.) which you would then give out to those you wish to invite to the pool.
+		Users trying to sign up will be required to enter that string on the sign up form.
+		Note that if used, the invitation code is case-sensitive.</p>
+
+		<p><code><strong>TIME_ZONE_DIFF</strong></code><br />
+		Set this to compensate for the time zone difference between your web server and the Eastern time zone.
+		For example, if your web server is located in the Central time zone, set the value to <code>-1</code>.
+		If your web server is located in the Pacific time zone, you should set the value to <code>-3</code></p>
+
+		<p><code><strong>DATABASE_FILE_PATH</strong></code><br />
+		This is used to set up the database connection.
+		Initially, the database file <code>(NFL.mdb)</code>is located in a subdirectory named <code>data</code>.
+		If you move or rename that database file, you will need to update this constant accordingly.</p>
+
+		<p><em>Note that some hosts provide a specific location on their server for databases.
+		If that is the case, <a href="#testConnection">see below</a>.</em></p>
+
+		<p><code><strong>DATA_ENCRYPTION_KEY</strong></code><br />
+		This character string is used to encrypt and decrypt user profile data (email address and contact information).
+		It is recommended that you change this key so that it is unique to your installation.
+		Any string of 20 to 40 random characters will do.</p>
+
+		<p><code><strong>SESSION_USERNAME_KEY</strong></code><br />
+		This is the name used for the ASP Session variable that tracks users when they log in.
+		Normally, you can leave it alone.
+		But, if you have multiple instances of the pool installed on your site, you should make this value unique in each.
+		Any name can be used.</p>
+
+		<p>The next section defines the options for the weekly pool.</p>
+
+		<pre class="sampleCode">
+'--------------------------------------------------------------------------
+' Pool settings.
+'--------------------------------------------------------------------------
+
+'Cost of a weekly pool entry.
+const BET_AMOUNT = 5
+
+'Allow tie picks flag.
+const ALLOW_TIE_PICKS = false
+
+'Hide other players picks until the games are locked flag.
+const HIDE_OTHERS_PICKS = false
+
+'Use confidence points flag.
+const USE_CONFIDENCE_POINTS = false
+
+'Use point spreads flag.
+const USE_POINT_SPREADS = false
+
+</pre>
+
+		<p><code><strong>BET_AMOUNT</strong></code><br />
+		The cost for each weekly entry, in dollars.</p>
+
+		<p><code><strong>ALLOW_TIE_PICKS</strong></code><br />
+		If <code>true,</code> any games that end in a tie will only count towards a player's score if the player actually picked a tie for that game.
+		If <code>false,</code> players may not pick games to end in a tie.
+		Instead, all players will receive half the normal points awarded for a correct pick on any game that ends in a tie.</p>
+
+		<p><code><strong>HIDE_OTHERS_PICKS</strong></code><br />
+		If <code>true,</code> players cannot see picks made by other players for games until they have been locked.
+		<em>The Administrator can still see all picks, however.</em>
+		If <code>false,</code> players can see other player's picks as soon as they are made.</p>
+
+		<p><code><strong>USE_CONFIDENCE_POINTS</strong></code><br />
+		If <code>true,</code>  players must assign confidence points to each pick.
+		For a given week, the point values range from one to the number of games that week and each number can be used only once.
+		The player's score for that week will be the total of the points assigned to each correct pick.
+		If <code>false,</code> a player's score is simply the number of correct picks he or she made that week.</p>
+
+		<p><code><strong>USE_POINT_SPREADS</strong></code><br />
+		If <code>true,</code> the outcome of each game is based on a point spread, set by the Administrator.
+		If <code>false,</code>  picks are straight-up.</p>
+
+		<p>Next are the options for the playoffs pool.</p>
+
+		<pre class="sampleCode">
+'--------------------------------------------------------------------------
+' Playoffs pool settings.
+'--------------------------------------------------------------------------
+
+'Enable playoffs pool pages flag.
+const ENABLE_PLAYOFFS_POOL = true
+
+'Cost of a playoffs pool entry.
+const PLAYOFFS_BET_AMOUNT = 20
+
+</pre>
+
+		<p><code><strong>ENABLE_PLAYOFFS_POOL</strong></code><br />
+		Set this to <code>true</code> to make the playoffs pool available.
+		You can set this to <code>false</code> during the regular season to trim down the number of items shown on the site menu.
+		Just set it back to <code>true</code> when the playoffs begin.</p>
+
+		<p>Note that the playoffs pool is played much like a regular weekly pool.
+		If the weekly pool is set to use point spreads and/or confidence points, the playoffs pool will be too.</p>
+
+		<p><code><strong>PLAYOFFS_BET_AMOUNT</strong></code><br />
+		The entry cost for the playoffs pool, in dollars.</p>
+
+		<p>Next are the setting for the optional side pool.
+		This pool is separate from the weekly pools and runs over the course of the regular season.</p>
+
+		<pre class="sampleCode">
+'--------------------------------------------------------------------------
+' Side pool options.
+'
+' Note: You can choose to add a survivor pool, a margin pool or both. Note
+' that if both are enabled, user's make a single pick each week which
+' will apply to both pools.
+'--------------------------------------------------------------------------
+
+'Enable survivor pool.
+const ENABLE_SURVIVOR_POOL = true
+
+'Enable margin pool.
+const ENABLE_MARGIN_POOL = true
+
+'Cost of a survivor/margin pool entry.
+const SIDE_BET_AMOUNT = 10
+
+'Starting week of the side pool.
+const SIDE_START_WEEK = 1
+
+'Amount of pot that goes to the survivor pool winner(s).
+'(Applies only when a combined survivor/margin pool is used, the winner(s)
+'of the margin pool get the remainder.)
+const SURVIVOR_POT_SHARE = .75
+
+'Number of losing picks that will eliminate a player.
+const SURVIVOR_STRIKE_OUT = 2
+
+'Tie game counts as a losing survivor pick flag.
+const SURVIVOR_STRIKE_ON_TIE = true
+
+'Deduct points on a missing margin pick flag.
+const MARGIN_DEDUCT_LOSS = true
+
+</pre>
+
+		<p><code><strong>ENABLE_SURVIVOR_POOL</strong></code><br />
+		Set to <code>true</code> to enable the survivor pool.</p>
+
+		<p><code><strong>ENABLE_MARGIN_POOL</strong></code><br />
+		Set to <code>true</code> to enable the margin pool.</p>
+
+		<p>Note that if both pools are enabled, it is considered a combined survivor/margin pool.
+		Players pay one entry fee for this combined pool and make one pick each week which will be applied toward both pools.
+		You will want to set <code><strong>SURVIVOR_POT_SHARE</strong></code> (see below) to determine how to split the pot between the two pools.</p>
+
+		<p><code><strong>SIDE_BET_AMOUNT</strong></code><br />
+		The entry cost for the side pool, in dollars.</p>
+
+		<p><code><strong>SIDE_START_WEEK</strong></code><br />
+		The week that the side pool begins.
+		This is useful if you initially disabled the side pool but later on, after the season has begun, decide you'd like to include it.</p>
+
+		<p><code><strong>SURVIVOR_POT_SHARE</strong></code><br />
+		Applies only if you combine the survivor and margin pools.
+		This value determines how much of the total pot is awarded to the winner(s) of the survivor pool.
+		The remainder will be awarded to the winner(s) of the margin pool.
+		It should be a number between zero and one.</p>
+
+		<p>For example, if set to <code>.50</code>, the pot will be split evenly between the two pools.</p>
+
+		<p><code><strong>SURVIVOR_STRIKE_OUT</strong></code><br />
+		For the survivor pool, this number determines how many incorrect picks it takes to eliminate a player.
+		Setting it to one means a player is eliminated with a single loss,
+		setting it to two means a player is eliminated on their second loss, etc.</p>
+
+		<p><code><strong>SURVIVOR_STRIKE_ON_TIE</strong></code><br />
+		Set to <code>true</code> to count a tie game as a loss in the survivor pool.
+		If set to <code>false</code>, tie games will be counted as a win.</p>
+
+		<p><code><strong>MARGIN_DEDUCT_LOSS</strong></code><br />
+		If set to <code>true</code>, players will lose points in the margin pool when their pick loses.
+		Note that if a player does not submit a pick for a given week, their score will be deducted using whichever game had the greatest scoring difference that week.
+		Setting this to <code>false</code> means that players will receive zero points for a losing or missing pick.</p>
+
+		<p>The last section controls the message board.</p>
+
+		<pre class="sampleCode">
+'--------------------------------------------------------------------------
+' Message board settings.
+'--------------------------------------------------------------------------
+
+'Enable message board flag.
+const ENABLE_MESSAGE_BOARD = true
+
+'Define maximum message length allowed.
+const MAX_MESSAGE_LENGTH = 2000
+
+'Define the number of days to keep posts. Set to zero to keep posts
+'indefinitely.
+const MAX_POST_AGE = 30
+
+'Define the maximum number of posts to keep (when this limit is exceeded,
+'the oldest posts will be removed first). Set to zero to keep an unlimited
+'number of posts.
+const MAX_POST_COUNT = 250
+
+'Number of posts displayed per page.
+const POST_PAGE_SIZE = 10
+
+</pre>
+
+		<p><code><strong>ENABLE_MESSAGE_BOARD</strong></code><br />
+		Set to <code>true</code> to enable the message board.
+		If set to <code>false</code>, users will not be able to post or view
+		messages.</p>
+
+		<p>By default, messages posted on the message board are removed after a certain number of days, or if the total number of messages exceeds a certain limit.
+		There is also a limit on the size of any one message.
+		All this is intended to keep the database from growing too large and possibly impacting performance.
+		You can adjust these limits to suit your particular installation.</p>
+
+		<p><code><strong>MAX_MESSAGE_LENGTH</strong></code><br />
+		Defines the maximum number of characters that can be used in a single post.
+		Note that this includes HTML markup characters.</p>
+
+		<p><code><strong>MAX_POST_AGE</strong></code><br />
+		Defines the maximum number of days that a post will be kept.
+		Posts older than this will be deleted.</p>
+
+		<p><code><strong>MAX_POST_COUNT</strong></code><br />
+		Defines the maximum number of posts that will be kept in the database.
+		When this limit is reached, posting a new message will cause the oldest post in the database to be removed (regardless of its age).</p>
+
+		<p><code><strong>POST_PAGE_SIZE</strong></code><br />
+		This simply defines how many posts will be shown per page when viewing the message board.
+		It does not affect the size of messages or how long they are kept.</p>
+
+		<h3><a name="emailFunction">2. Code Your Email Function (Optional)</a></h3>
+
+		<p>The <code>includes/email.asp</code> file contains a function stub named <code>SendMail().</code>
+		This is intended to programmatically send emails to players, such as when a new user signs up or when the Administrator sends email notifications regarding point spreads updates, scheduling changes, etc.</p>
+
+		<p>Because each web host is different, you'll need to edit this function to provide working code for your particular installation.
+		<em>Check with your host provider regarding how to send email via ASP.</em>
+		Most provide sample code which you can tailor to your needs.
+		If your host does not provide this functionality, set the <code>SERVER_EMAIL_ENABLED</code> option to <code>false</code> in your <a href="#configureSettings">configuration settings</a>.</p>
+
+		<p>Your implementation should use the function arguments defined in the code stub.
+		It should return an empty string if the email was successfully sent or an error message if it fails.</p>
+
+		<p>Below is an example using CDOSYS (commonly found on Windows servers) showing how to use the function arguments and set the return a value:</p>
+
+		<pre class="sampleCode">
+function SendMail(toAddr, subjectText, bodyText)
+
+  dim mailer
+  dim cdoMessage, cdoConfig
+
+  'Assume all will go well.
+  SendMail = &quot;&quot;
+
+  'Configure the message.
+  set cdoMessage = Server.CreateObject(&quot;CDO.Message&quot;)
+  set cdoConfig = Server.CreateObject(&quot;CDO.Configuration&quot;)
+  cdoConfig.Fields(&quot;http://schemas.microsoft.com/cdo/configuration/sendusing&quot;)  = 2
+  cdoConfig.Fields(&quot;http://schemas.microsoft.com/cdo/configuration/smtpserver&quot;) = &quot;mail.example.net&quot;
+  cdoConfig.Fields.Update
+  set cdoMessage.Configuration = cdoConfig
+
+  'Create the email.
+  cdoMessage.From     = ADMIN_USERNAME &amp; &quot; &lt;&quot; &amp; ADMIN_EMAIL &amp; &quot;&gt;&quot;
+  cdoMessage.To       = toAddr
+  cdoMessage.Subject  = subjectText
+  cdoMessage.TextBody = bodyText
+
+  'Send it.
+  on error resume next
+  cdoMessage.Send
+
+  'If an error occurred, return the error description.
+  if Err.Number <> 0 then
+    SendMail = Err.Description
+  end if
+
+  'Clean up.
+  set cdoMessage = Nothing
+  set cdoConfig  = Nothing
+
+end function
+
+</pre>
+
+		<h3><a name="testConnection">3. Upload the Files and Test the Database Connection</a></h3>
+
+		<p>Upload all files to your web site.
+		You should then be able to browse to the site and login as the
+		Admin using the default password <code>admin.</code></p>
+
+		<p>If not, the problem is probably with the database connection.
+		Check that you set the database file path correctly in step 1 and that the database file has been uploaded to that location.</p>
+
+		<p>If all looks correct, check with your host provider.
+		They may have specific requirements for setting up a database connection, such as storing the database in a special location, defining a datasource name, etc.
+		If that is the case, make the necessary configuration changes and/or move the database.
+		You may also need to modify the code for the <code>OpenDB()</code> subroutine in the <code>includes/common.asp</code> file to match what your host provider specifies.</p>
+
+		<p>Once you have the database connection working, login as the Admin and try updating the database, say by adding a new user.
+		If you see an error like the following:</p>
+
+		<pre class="errorMessage">
+Microsoft OLE DB Provider for ODBC Drivers (0x80004005)
+[Microsoft][ODBC Microsoft Access Driver] Operation must
+use an updateable query.
+</pre>
+
+		<p>It means you'll need to set up access permissions for the database file.
+		Again, this is host-specific so check with your provider regarding how to set permissions to allow your database to be updated by web application..</p>
+
+		<h3><a name="testEmail">4. Test Your Email Function (Optional)</a></h3>
+
+		<p>If you've set your pool up to use email, you can test it by first editing the Administrator profile to add a working email address and check the "New announcements" notification option.
+		Then go to the "Edit News" page, check the "Send update notification to users." option and click on <code>Save</code>.</p>
+
+		<p>If all is well, you should receive an email at the address you specified within a few minutes.</p>
+
+		<h3><a name="invitePlayers">5. Invite Some Friends to Play</a></h3>
+
+		<p>Once installed and tested, you can start inviting your friends to play.</p>
+		<p>You can either manually add users (don't forget to give them the password you have assigned to them) or send them to the sign up form (remember to give them the invitation code, if you specified one in the pool configuration).</p>
+
+		<h2><a name="releaseNotes">Release Notes</a></h2>
+
+		<ul>
+			<li>2.2 - Updated email notifications to include relevant data.</li>
+			<li>2.1 - Added the option to start the survivor/margin pool after the first week.</li>
+			<li>2.0 - Survivor/margin pool added, more performance enhancements, restructured site pages.</li>
+			<li>1.2 - Moved all configuration settings to the <code>includes/common.asp</code> file.</li>
+			<li>1.1 - Modified to store calculated values for weekly results in the database for improved performance.</li>
+			<li>1.0 - Initial release.</li>
+		</ul>
+
+	</div>
+</body>
+</html>

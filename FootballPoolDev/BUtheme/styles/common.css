@@ -1,0 +1,483 @@
+/****************************************************************************/
+/* Common page styles.                                                      */
+/****************************************************************************/
+
+/*--------------------------------------------------------------------------*/
+/* General styles.                                                          */
+/*--------------------------------------------------------------------------*/
+
+a
+{
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a,
+a:active,
+a:hover,
+a:visited
+{
+	color: #0040c0;
+}
+
+a:active,
+a:hover
+{
+	text-decoration: underline;
+}
+
+a img
+{
+	border-style: none;
+}
+
+body
+{
+	background-color: #ffffff;
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10.5pt;
+	margin: 0px;
+	padding: 0px;
+}
+
+h1
+{
+	font-size: 14pt;
+}
+
+h2
+{
+	font-size: 12pt;
+}
+
+h3
+{
+	font-size: 11pt;
+}
+
+td, th
+{
+	padding: 2px .2em;
+}
+
+ul
+{
+	list-style-type: square;
+}
+
+/* Remove extra spacing in table cells inserted by some browsers. */
+
+td > h1:first-child, th > h1:first-child,
+td > h2:first-child, th > h2:first-child,
+td > h3:first-child, th > h3:first-child,
+td > h4:first-child, th > h4:first-child,
+td > h5:first-child, th > h5:first-child,
+td > h6:first-child, th > h6:first-child,
+td > p:first-child, th > p:first-child,
+td > div > p:first-child, th > div > p:first-child,
+div.message > p:first-child
+{
+	margin-top: 0px;
+}
+
+td > h1:last-child, th > h1:last-child,
+td > h2:last-child, th > h2:last-child,
+td > h3:last-child, th > h3:last-child,
+td > h4:last-child, th > h4:last-child,
+td > h5:last-child, th > h5:last-child,
+td > h6:last-child, th > h6:last-child,
+td > p:last-child, th > p:last-child,
+td > div > p:last-child, th > div > p:last-child,
+div.message > p:last-child
+{
+	margin-bottom: 0px;
+}
+
+/*--------------------------------------------------------------------------*/
+/* Form elements.                                                           */
+/*--------------------------------------------------------------------------*/
+
+input,
+select,
+textarea
+{
+	color: #20a060;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+textarea
+{
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+input.button
+{
+	background-color: #4060a0;
+	border: 2px solid;
+	border-color: #6080c0 #204080 #204080 #6080a0;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+input.numeric
+{
+	text-align: right;
+}
+
+input.readonly
+{
+	background-color: #f7f7f7;
+	border: 1px solid #b0b0b0;
+	color: #b0b0b0;
+	padding: 2px;
+}
+
+/* Used with the TinyMCE control. */
+
+.htmlEditorArea div
+{
+	border: 1px solid #7f9db9;
+	margin: 1em;
+}
+
+.htmlEditorArea input,
+.htmlEditorArea select,
+.htmlEditorArea textarea 
+{
+	color: #000000;
+}
+
+.mceContentBody
+{
+	background-image: none;
+}
+
+/* Used to indicate invalid fields. */
+
+div.fieldError,
+input.fieldError,
+select.fieldError,
+textarea.fieldError,
+.htmlEditorArea.fieldError
+{
+	background-color: #ffff00;
+	border: 1px solid #802020;
+	color: #802020;
+	padding: 2px 1px;
+}
+
+div.fieldError,
+.htmlEditorArea.fieldError
+{
+	padding: 0px;
+}
+
+/*--------------------------------------------------------------------------*/
+/* Page sections.                                                           */
+/*--------------------------------------------------------------------------*/
+
+#titleBar
+{
+	background-color: #4060a0;
+	border: 1px solid #204080;
+	font-size: 9pt;
+	font-weight: bold;
+}
+
+#status
+{
+	background-color: #f8f8f8;
+	border: 1px solid #204080;
+	color: #204080;
+	float: right;
+	padding: 1px 1em;
+	white-space: nowrap;
+}
+
+#status.error
+{
+	background-color: #ffff00;
+	color: #802020;
+}
+
+#login
+{
+	clear: right;
+	color: #ffffff;
+	float: right;
+	padding-right: 1em;
+	padding-top: 2px;
+}
+
+#login a,
+#login a:active,
+#login a:hover,
+#login a:visited
+{
+	color: #ffffff;
+}
+
+#title
+{
+	color: #ffffff;
+	font-size: 20pt;
+	font-style: italic;
+}
+
+#wrapper
+{
+	margin: auto;
+}
+
+#subTitle
+{
+	color: #7080a0;
+	font-size: 14pt;
+	font-style: italic;
+	font-weight: bold;
+	padding: 1ex 1em 2px 0px;
+	text-align: right;
+}
+
+#copyright
+{
+	border-top: 1px solid #7080a0;
+	padding: 2px;
+	padding-left: 1em;
+	padding-right: 1em;
+	text-align: right;
+}
+
+#contact
+{
+	float: left;
+}
+
+/*--------------------------------------------------------------------------*/
+/* Special text.                                                            */
+/*--------------------------------------------------------------------------*/
+
+.info,
+.error
+{
+	border: 1px solid #802020;
+	font-weight: bold;
+	padding: .5ex 1em;
+}
+
+.info
+{
+	background-color: #e0f8d0;
+	border-color: #208020;
+	color: #208020;
+}
+
+.error
+{
+	background-color: #ffff00;
+	border-color: #802020;
+	color: #802020;
+}
+
+.error p
+{
+	margin-top: .5ex;
+	margin-bottom: 1ex;
+}
+
+.error ul
+{
+	margin-top: 1ex;
+	margin-bottom: .5ex;
+}
+
+.small
+{
+	font-size: 9pt;
+}
+
+/* For dynamically displaying confidence points on the entry form. */
+
+.availPts
+{
+	color: #ffffff;
+}
+
+.duplPts
+{
+	color: #e08000;
+	text-decoration: line-through;
+}
+
+.usedPts
+{
+	color: #90a0c0;
+	text-decoration: line-through;
+}
+
+/* For Administrator-only text. */
+
+.adminSection
+{
+	background-color: #f0f0e0;
+	border: 1px solid #204080;
+	padding: .5em;
+}
+
+td.adminSection
+{
+	border-width: 0px;
+}
+
+/*--------------------------------------------------------------------------*/
+/* Main table styles.                                                       */
+/*--------------------------------------------------------------------------*/
+
+table.main
+{
+	background-color: #ffffff;
+	border: 1px solid #204080;
+	empty-cells: show;
+}
+
+table.main tr.header
+{
+	background-color: #4060a0;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+table.main tr.subHeader
+{
+	background-color: #7080a0;
+	color: #ffffff;
+}
+
+table.main tr.bottomEdge td,
+table.main tr.bottomEdge th
+{
+	border-bottom: 1px solid #204080;
+}
+
+table.main tr.topEdge td,
+table.main tr.topEdge th
+{
+	border-top: 1px solid #204080;
+}
+
+table.main tr.bottomEdge table td,
+table.main tr.bottomEdge table th
+{
+	border: 0px none;
+}
+
+table.main tr.alt
+{
+	background-color: #f0f0e0;
+}
+
+table.main td,
+table.main th
+{
+	padding-left: .25em;
+	padding-right: .25em;
+}
+
+table.main tr.singleLine
+{
+	white-space: nowrap;
+}
+
+/* For displaying picks on results pages. */
+
+table.main td.confPick,
+table.main td.margPick
+{
+	font-size: 9pt;
+	line-height: 1em;
+}
+
+table.main th.sidePickHeader
+{
+	width: 2.2em;
+}
+
+/* For the standings page. */
+
+table.main tr.afc
+{
+	background-color: #804020;
+}
+
+table.main tr.afc.bottomEdge th,
+table.main tr.afc.topEdge th
+{
+	border-color: #804020;
+}
+
+table.main tr.nfc
+{
+	background-color: #204080;
+}
+
+table.main tr.nfc.bottomEdge th,
+table.main tr.nfc.topEdge th
+{
+	border-color: #204080;
+}
+
+table.main tr.playoffsBreak td
+{
+	border-bottom: 3px double #204080;
+}
+
+/* For links on table sub headers. */
+
+table.main tr.subHeader th a,
+table.main tr.subHeader th a:active,
+table.main tr.subHeader th a:hover,
+table.main tr.subHeader th a:visited
+{
+	color: #ffff80;
+}
+
+/* For sortable columns on tables that support it. */
+
+table.main tr.sortable a,
+table.main tr.sortable a:active,
+table.main tr.sortable a:hover,
+table.main tr.sortable a:visited
+{
+	color: #ffff00;
+}
+
+table.main tr.header th.sortedCol
+{
+	background-color: #305090;
+}
+
+table.main td.sortedCol
+{
+	background-color: #f0f0f0;
+}
+
+table.main tr.alt td.sortedCol
+{
+	background-color: #e0e0d0;
+}
+
+/* Used to fix the table width. */
+
+table.main.fixed
+{
+	width: 40em;
+}
+
+table.main td.freeForm
+{
+	padding: 1em;
+}
+

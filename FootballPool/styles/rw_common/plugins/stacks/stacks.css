@@ -1,0 +1,113 @@
+.stacks_div {
+	position:		relative;
+	display:		block;
+
+}
+
+.stacks_out {
+	position:		relative;
+	display:		block;
+	border:			0;
+	padding:		0;
+	margin-left:	auto;
+	margin-right:	auto;
+	overflow:		hidden;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+
+.stacks_in {                                   
+    position:		relative;                                       
+    display:		block;                                      
+	margin:			0;                           
+	padding:		0;                            
+	border:			0;
+	overflow:		visible;                                        
+}
+
+
+.stacks_in>p {
+	margin-top: 0;
+}  
+
+
+.stacks_empty .stacks_in {
+	display:		none;
+}         
+                              
+
+.stacks_top {
+	position:		relative;                                       
+	display:		block;
+	margin:			0;
+	padding:		0;
+	border:			0;                                      
+	overflow:		hidden;    
+}   
+                                        
+
+.centered_image {
+	position: relative;
+	display: block;
+	text-align:center;
+} 
+
+
+.centered_image .imageStyle {
+	position: relative;
+	display: block;
+	margin:0 auto;
+}
+
+
+.stacks_float_left {
+	float:left;
+	margin-right:20px;
+}
+
+
+.stacks_float_right {
+	float:right;
+	margin-left:20px;
+}
+
+
+.stacks_clearer {
+	position:		relative;
+	display:		block;
+	clear:			both;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+}
+
+
+.stacks_clear_left {
+    position:		relative;
+    display:		block;
+	clear:			left;
+}
+
+
+.stacks_clear_right {
+    position:		relative;
+    display:		block;
+	clear:			right;
+}.image_center {
+	margin-right: auto;
+	margin-left: auto;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	color: #666;
+}
+.large_text {
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 36px;
+	color: #666;
+	text-align: center;
+	font-weight: bold;
+}

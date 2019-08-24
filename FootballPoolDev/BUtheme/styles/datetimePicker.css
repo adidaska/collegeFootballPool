@@ -1,0 +1,119 @@
+/****************************************************************************/
+/* Styles for the pop-up date and time pickers.                             */
+/****************************************************************************/
+
+#calendar,
+#clock
+{
+	background-color: #f8f8f8;
+	border: 2px solid #204080;
+	display: none;
+	padding: 8px;
+	padding-bottom: 0px;
+	position: absolute;
+	text-align: center;
+}
+
+#calendar table
+{
+	background-color: #ffffff;
+	border: 1px solid #204080;
+	border-collapse: collapse;
+}
+
+#calendar tr.monthHeader
+{
+	background-color: #4060a0;
+	color: #ffffff;
+}
+
+#calendar tr.monthHeader th
+{
+	border-bottom: 1px solid #204080;
+}
+
+#calendar a
+{
+	text-decoration: none;
+}
+
+#calendar tr.monthHeader a,
+#calendar tr.monthHeader a:active,
+#calendar tr.monthHeader a:visited,
+#calendar tr.monthHeader a:hover
+{
+	color: #fff0a0;
+}
+
+#calendar tr.daysHeader
+{
+	background-color: #7080a0;
+	color: #ffffff;
+}
+
+#calendar tr.daysHeader th
+{
+	border-bottom: 1px solid #204080;
+	width: 1.5em;
+}
+
+#calendar td, #calendar th
+{
+	padding: 2px;
+}
+
+#calendar td
+{
+	text-align: right;
+}
+
+#calendar td.weekend
+{
+	background-color: #f0f0e0;
+}
+
+#calendar tr.dates a,
+#calendar tr.dates a:active,
+#calendar tr.dates a:hover,
+#calendar tr.dates a:visited
+{
+	color: #20a060;
+}
+
+#calendar tr.dates a.otherMonth,
+#calendar tr.dates a.otherMonth:active,
+#calendar tr.dates a.otherMonth:hover,
+#calendar tr.dates a.otherMonth:visited
+{
+	color: #a0c0b0;
+}
+
+#calendar td.selected
+{
+	background-color: #20a060;
+}
+
+#calendar td.selected a,
+#calendar td.selected a:active,
+#calendar td.selected a:hover,
+#calendar td.selected a:visited
+{
+	color: #ffffff;
+}
+
+#clock table
+{
+	border-collapse: collapse;
+}
+
+#clock table td
+{
+	padding: 2px;
+}
+
+input.activeDateTime
+{
+	background-color: #f7f9fb;
+	border-color: #a0b0c0;
+	color: #a0b0c0;
+}

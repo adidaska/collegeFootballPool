@@ -1,0 +1,91 @@
+/* @override http://dessmachine.com/footballpool/styles/menu.css */
+
+/****************************************************************************/
+/* Field Day Theme                                                          */
+/*                                                                          */
+/* Site menu styles.                                                        */
+/****************************************************************************/
+
+#menuBar,
+.menu
+{
+	background-color: #1a1a06;
+	border: 1px solid #808000;
+}
+
+/* changed to black */
+
+#menuBar
+{
+	background-image: url('../graphics/menuBarBg.jpg');
+	background-position: left bottom;
+	background-repeat: repeat-x;
+	border-bottom-color: #404010;
+	margin-bottom: 1em;
+}
+
+#menuBar a,
+.menu a
+{
+	color: #006000;
+	display: block;
+	font-size: 9pt;
+}
+
+#menuBar table
+{
+	border-collapse: collapse;
+}
+
+#menuBar td
+{
+	padding: 0px;
+	text-align: left;
+}
+
+#menuBar a
+{
+	height: 100%;
+	padding: 2px 1.25em 4px 1.25em;
+}
+
+#menuBar a span.arrow
+{
+	font-size: 8pt;
+}
+
+#menuBar a.hasMenu:hover
+{
+	text-decoration: none;
+}
+
+.menu
+{
+	margin-left: -1px; /* Adjust to position menu under link. */
+	position: absolute;
+	visibility: hidden;
+	z-index: 1;
+}
+
+.menu a
+{
+	border: 1px solid #ffff40;
+	margin: 2px .25em;
+	padding: 3px 1em;
+}
+
+.menu a:active,
+.menu a:hover,
+.menu a:focus,
+.menu a.ieFocus /* For IE browsers. */
+{
+	background-color: #208020;
+	border: 1px solid #006000;
+	color: #ffffff;
+}
+
+.menu .separator
+{
+	border-bottom: 1px solid #808000;
+	margin: 4px .5em;
+}

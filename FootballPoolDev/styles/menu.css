@@ -1,0 +1,116 @@
+w/* @override http://www.dessmachine.com/footballpooldev/styles/menu.css */
+
+/****************************************************************************/
+/* Field Day Theme                                                          */
+/*                                                                          */
+/* Site menu styles.                                                        */
+/****************************************************************************/
+
+#menuBar,
+.menu
+{
+	background-color: #232323;
+}
+
+#menuBar
+{
+	border-bottom-color: #151515;
+	margin-bottom: 1em;
+	background-color: black;
+	background-image: none;
+	background-repeat: repeat-x;
+	background-position: left bottom;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#menuBar a,
+.menu a
+{
+	color: #FFF;
+	display: block;
+	font-size: 9pt;
+}
+
+#menuBar table
+{
+	border-collapse: collapse;
+	border: none;
+	border-width: none;
+	line-height: 18px;
+	margin: 0px;
+	text-align: center;
+	padding: 5;
+}
+
+#menuBar td
+{
+	padding: 0px;
+	text-align: left;
+}
+
+#menuBar a
+{
+	height: 100%;
+	padding: 2px 1.25em 4px 1.25em;
+}
+
+#menuBar a span.arrow
+{
+	font-size: 8pt;
+}
+
+#menuBar a.hasMenu:hover
+{
+	text-decoration: none;
+}
+
+.menu
+{
+	margin-left: -1px; /* Adjust to position menu under link. */
+	position: absolute;
+	visibility: hidden;
+	z-index: 1;
+}
+
+.menu a
+{
+	margin: 2px .25em;
+	padding: 3px 1em;
+}
+
+.menu a:active,
+.menu a:hover,
+.menu a:focus,
+.menu a.ieFocus /* For IE browsers. */
+{
+	background-color: #333;
+	color: #ffffff;
+}
+
+.menu .separator
+{
+	border-bottom: 1px solid #808000;
+	margin: 4px .5em;
+}
+
+.navigation 
+{
+	background-color: #333;
+	border-top: 1px solid #383838;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #383838;
+	border-bottom: 1px solid #444;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #444;
+	-moz-box-shadow: 0 2px 0 0 #262626, 0 -1px 0 0 #171717;
+	-webkit-box-shadow: 0 2px 0 0 #262626, 0 -1px 0 0 #171717;
+	-o-box-shadow: 0 2px 0 0 #262626, 0 -1px 0 0 #171717;
+	box-shadow: 0 2px 0 0 #262626, 0 -1px 0 0 #171717;
+	display: block;
+	margin-bottom: 2px;
+	min-width: 984px;
+	position: relative;
+	z-index: 3100;
+}
