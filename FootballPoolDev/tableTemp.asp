@@ -22,7 +22,7 @@
     
     <script src="js/jquery/jquery-1.5.2.min.js"></script>
 	<script src="js/jquery/jquery-ui-1.8.12.custom.min.js"></script>
-    <script src="js/misc/excanvas.min.js"></script>
+<!--    <script src="js/misc/excanvas.min.js"></script>-->
     <script src="js/jquery/facebox.js"></script>
     <script src="js/jquery/jquery.visualize.js"></script>
     <script src="js/jquery/jquery.dataTables.min.js"></script>
@@ -30,8 +30,8 @@
     <script src="js/jquery/jquery.uniform.min.js"></script>
     <script src="js/jquery/jquery.placeholder.min.js"></script>
     
-    <script src="js/widgets.js"></script>
-    <script src="js/dashboard.js"></script>
+<!--    <script src="js/widgets.js"></script>-->
+<!--    <script src="js/dashboard.js"></script>-->
     
     <script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {

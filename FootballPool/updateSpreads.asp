@@ -7,8 +7,11 @@
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="styles/style.css" />
 	<link rel="stylesheet" type="text/css" href="styles/menu.css" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="scripts/common.js"></script>
 	<script type="text/javascript" src="scripts/menu.js"></script>
+	<script type="text/javascript" src="js/jaflGamesSpread.js"></script>
+
 </head>
 <body>
 <!-- #include file="includes/header.asp" -->
@@ -93,10 +96,10 @@
 		<div><input type="hidden" name="week" value="<% = week %>" /></div>
 		<table class="main" cellpadding="0" cellspacing="0">
 			<tr class="header bottomEdge">
-			  <th align="left" colspan="8">Week <% = week %></th>
+			  <th align="left" colspan="9">Week <% = week %></th>
 			</tr>
 <%	dim gameDate, gameTime
-	dim visitor, home
+	dim visitor, home, espnID
 	dim alt
 	set rs = WeeklySchedule(week)
 	if not (rs.BOF and rs.EOF) then
@@ -109,6 +112,7 @@
 			visitor  = rs.Fields("VCity").Value
 			spread   = rs.Fields("PointSpread").Value
 			home     = rs.Fields("HCity").Value
+			espnID   = rs.Fields("EspnGameId").Value
 
 			'Set the team names for display.
 			if rs.Fields("VDisplayName") <> "" then
@@ -133,8 +137,10 @@
 				<td><% = FormatDate(gameDate) %></td>
 				<td><% = FormatTime(gameTime) %></td>
 				<td><% = visitor %></td>
+				<td><div id="spread_<% = espnID %>">Getting Spread...</div></td>
 				<td><input type="text" name="spread-<% = n %>" value="<% = spread %>" size="2" class="<% = FieldStyleClass("numeric", "spread-" & n) %>" /></td>
 				<td>at <% = home %></td>
+
 			</tr>
 <%			rs.MoveNext
 			n = n + 1

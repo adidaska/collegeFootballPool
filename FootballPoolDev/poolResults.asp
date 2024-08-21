@@ -8,20 +8,48 @@
 	<link rel="stylesheet" type="text/css" href="styles/style.css" />
 	<link rel="stylesheet" type="text/css" href="styles/menu.css" />
 
-	<!--<link rel="stylesheet" href="styles/newstyles/reset.css" type="text/css" media="screen" title="no title" />-->
-	<!--<link rel="stylesheet" href="styles/newstyles/text.css" type="text/css" media="screen" title="no title" />-->
-	<!--<link rel="stylesheet" href="styles/newstyles/form.css" type="text/css" media="screen" title="no title" />-->
-	<!--<link rel="stylesheet" href="styles/newstyles/buttons.css" type="text/css" media="screen" title="no title" />-->
-	<!--<link rel="stylesheet" href="styles/newstyles/grid.css" type="text/css" media="screen" title="no title" />	-->
-	<!--<link rel="stylesheet" href="styles/newstyles/layout.css" type="text/css" media="screen" title="no title" />	-->
-	<!--<link rel="stylesheet" href="styles/newstyles/ui-darkness/jquery-ui-1.8.12.custom.css" type="text/css" media="screen" title="no title" />-->
-	<!--<link rel="stylesheet" href="styles/newstyles/plugin/jquery.visualize.css" type="text/css" media="screen" title="no title" />-->
-	<!--<link rel="stylesheet" href="styles/newstyles/plugin/facebox.css" type="text/css" media="screen" title="no title" />-->
-	<!--<link rel="stylesheet" href="styles/newstyles/plugin/uniform.default.css" type="text/css" media="screen" title="no title" />-->
-	<!--<link rel="stylesheet" href="styles/newstyles/plugin/dataTables.css" type="text/css" media="screen" title="no title" />-->
-	<!--<link rel="stylesheet" href="styles/newstyles/custom.css" type="text/css" media="screen" title="no title">-->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css">
+	<link rel="stylesheet" href="styles/newstyles/reset.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/text.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/form.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/buttons.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/grid.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/layout.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/ui-darkness/jquery-ui-1.8.12.custom.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/plugin/jquery.visualize.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/plugin/facebox.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/plugin/uniform.default.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/plugin/dataTables.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/custom.css" type="text/css" media="screen" title="no title">
 
+	<script type="text/javascript" src="scripts/common.js"></script>
+	<script type="text/javascript" src="scripts/menu.js"></script>
+
+
+
+    <script src="js/jquery/jquery-1.5.2.min.js"></script>
+	<script src="js/jquery/jquery-ui-1.8.12.custom.min.js"></script>
+<!--    <script src="js/misc/excanvas.min.js"></script>-->
+    <script src="js/jquery/facebox.js"></script>
+    <script src="js/jquery/jquery.visualize.js"></script>
+
+    <script src="js/jquery/jquery.tablesorter.min.js"></script>
+    <script src="js/jquery/jquery.uniform.min.js"></script>
+    <script src="js/jquery/jquery.placeholder.min.js"></script>
+    <script src="js/jquery/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" src="scripts/tableSort.js"></script>
+
+<!--    <script src="js/widgets.js"></script>-->
+<!--    <script src="js/dashboard.js"></script>-->
+
+    <script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$('#example').dataTable( {
+					"aaSorting": [[ 3, "desc" ], [4, "asc"]],
+					"aLengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]]
+				} );
+			} );
+	</script>
 
 
 	<link href="styles/style.css" rel="stylesheet" type="text/css" />
@@ -52,7 +80,7 @@
             numGames = NumberOfGames(week)
 
             'See if this user is missing any picks for this week.
-            dim username
+            dim username, displayname
             dim tbActualVis, tbActualHome, tbGuessVis, tbGuessHome
             dim sql, rs
             username = Session(SESSION_USERNAME_KEY)
@@ -100,26 +128,25 @@
 
     <% call DisplayWeekNavigation(1, "")  %>
 
-
-
-
-
      <table class="data display datatable" id="example">
         <thead>
-                    <tr>
-                        <th id="name" data-sort="string">Name</th>
-                        <th id="wins" data-sort="float" data-sort-onload=yes data-sort-multicolumn="diff" data-sort-default="desc">Wins</th>
-                        <th id="games" data-sort="int">Games</th>
-                        <th id="percentage" data-sort="float">Pct</th>
-                        <th id="diff" data-sort="int" data-sort-default="desc">TB Diff</th>
-                        <th id="scores" data-sort="string">TB Scores</th>
-                        <% dim g
-        					for g = 1 to gameCols %>
-        					<th data-sort="string"><% = g %></th>
-                        <% next %>
+            <tr>
+                <th>Name</th>
+                <th>Wins</th>
+                <th>Games</th>
+                <th>Pct</th>
+                <th>TB Diff</th>
+                <th>TB Scores</th>
+                <% dim g
+					for g = 1 to gameCols %>
+					<th><% = g %></th>
+                <% next %>
 
-                    </tr>
-                </thead>
+
+
+
+            </tr>
+        </thead>
 
 		<!--<tbody id="poolResults">-->
 
@@ -339,7 +366,7 @@
     </p>
     	</div> <!-- #content -->
    <!--</p></td></tr></table>-->
-</div>
+
 
 
 

@@ -37,7 +37,7 @@
 	const PAGE_TITLE = "JAFL - Just Another Football League"
 
 	'Administrator email address.
-	const ADMIN_EMAIL = "andres.arbelaez@me.com"
+	const ADMIN_EMAIL = "Andres.arbelaez1@icloud.com"
 
 	'Flag indicating whether the server can send email or not.
 	const SERVER_EMAIL_ENABLED = false
@@ -476,6 +476,25 @@
 
 	end function
 
+    '--------------------------------------------------------------------------
+    ' Returns the number of completed games (i.e., games with a result)
+    ' for the specified week.
+    '--------------------------------------------------------------------------
+    function NumberOfTotalCompletedGames()
+
+        dim sql, rs
+
+        NumberOfTotalCompletedGames = 0
+        sql = "SELECT COUNT(*) AS Total" _
+           & " FROM Schedule WHERE" _
+           & " NOT ISNULL(Result)"
+        set rs = DbConn.Execute(sql)
+        if not (rs.BOF and rs.EOF) then
+            NumberOfTotalCompletedGames = rs.Fields("Total").Value
+        end if
+
+    end function
+
 	'--------------------------------------------------------------------------
 	' Returns the number of games scheduled for the specified week.
 	'--------------------------------------------------------------------------
@@ -537,19 +556,19 @@
 	'--------------------------------------------------------------------------
 	sub OpenDB()
 
-		dim dbDir, connectstr
+        dim dbDir, connectstr
 
 		set DbConn = Server.CreateObject("ADODB.Connection")
 		dbDir = Server.MapPath(DATABASE_FILE_PATH)
 
 		'Use one of the following, depending on what database drivers your host
 		'has installed.
-		
+
 		connectstr = "Driver={Microsoft Access Driver (*.mdb)};DBQ=" & dbDir
 		DbConn.Open connectstr
 		'DbConn.Open "Data Source=" & dbDir & ";Provider=Microsoft.Jet.OLEDB.4.0;"
 		'DbConn.Open "DBQ="& dbDir & ";Driver={Microsoft Access Driver (*.mdb)}"
-		
+
 		
 		'start
 		'Dim oConn, oRs

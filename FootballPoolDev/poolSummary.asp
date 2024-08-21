@@ -414,6 +414,7 @@
 	class UserObj
 
 		public name
+		public displayname
 		public poolsPlayed
 		public poolsWon
 		public totalCorrect
@@ -475,7 +476,7 @@
 						totalScore = totalScore + confScore
 					end if
 				end if
-				totalGames = totalGames + NumberOfCompletedGames(week)
+				totalGames = NumberOfTotalCompletedGames()
 				rs.MoveNext
 			loop
 

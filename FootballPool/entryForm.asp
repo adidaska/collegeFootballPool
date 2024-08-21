@@ -4,11 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<title><% = PAGE_TITLE & ": " & PageSubTitle %></title>
-    
-<link rel="shortcut icon" href="favicon.ico" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" />
 	<!--<link rel="stylesheet" type="text/css" href="styles/common.css" />-->
 	<link rel="stylesheet" type="text/css" href="styles/menu.css" />
     <link href="styles/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jaflGames.js"></script>
 
 
 </head>
@@ -247,10 +248,31 @@
 			end if
 
 			'Validate the tiebreaker field.
-			tb1 = Trim(Request.Form("tb1-" & week))
-			tb2 = Trim(Request.Form("tb2-" & week))
+			' So if the fields are blank then we want to put in a 0
+			'if tb1 = "" and not allLocked then
+            '    'tb1 = 0
+            '    FormFieldErrors.Add "tb-" & week, "it thinks this is empty"
+            'else
+            '    tb1 = Trim(Request.Form("tb1-" & week))
+            'end if
+            'if tb2 = "" and not allLocked then
+            '    tb2 = 0
+            'else
+            '    tb2 = Trim(Request.Form("tb2-" & week))
+            'end if
+
+            tb1 = Trim(Request.Form("tb1-" & week))
+            tb2 = Trim(Request.Form("tb2-" & week))
+
+
 			if tb1 = "" or tb2 = "" then
-				FormFieldErrors.Add "tb-" & week, "You must enter a point total for the tiebreaker."
+				'FormFieldErrors.Add "tb-" & week, "You must enter a point total for the tiebreaker."
+				if tb1 = "" then
+				    tb1 = 0
+				end if
+				if tb2 = "" then
+				    tb2 = 0
+				end if
 			elseif not IsNumeric(tb1) or not IsNumeric(tb2) then
 				FormFieldErrors.Add "tb1-" & week, "'" & tb1 & "' is not a valid amount."
 			elseif CInt(tb1) < 0 or CInt(tb1) <> CDbl(tb1) then
@@ -268,6 +290,7 @@
 
 			'If there were any errors, display the error messages. Otherwise, do
 			'the updates.
+			On Error Resume Next
 			if FormFieldErrors.Count > 0 then
 				call FormFieldErrorsMessage("Error: Invalid fields. Please correct and resubmit.")
 			else
@@ -292,26 +315,50 @@
 				sql = "DELETE FROM Tiebreaker" _
 				    & " WHERE Week = " & week _
 				    & " AND Username = '" & SqlString(username) & "'"
-				call DbConn.Execute(sql)   
+				call DbConn.Execute(sql)
 				sql = "INSERT INTO Tiebreaker" _
 				   & " (Week, Username, VisGuess, HomeGuess)" _
 				   & " VALUES(" & week & ", " _
 				   & "'" & SqlString(username) & "', " _
-				   & tb1 & ", " & tb2 & ")" 
-				   
+				   & tb1 & ", " & tb2 & ")"
+
 				call DbConn.Execute(sql)
 
 				'Clear any saved weekly results data.
 				call ClearWeeklyResultsCache(week)
 
-				'Updates complete, redirect to the results page.
-				if IsAdmin() then
-					'toggleDialog()
-					Response.Redirect("poolResults.asp?week=" & week & "&username=" & Server.URLEncode(username))
-				else
-					'toggleDialog()
-					Response.Redirect("poolResults.asp?week=" & week)
+
+                If Err.Number <> 0 Then
+                    ' An error occurred
+                    Response.Write "Error executing SQL: " & Err.Description
+                    ' Log the error or handle it as needed
+                    ' You might also want to roll back a transaction if needed
+                Else
+                    'Updates complete, redirect to the results page.
+                    if IsAdmin() then
+                        'toggleDialog()
+                        Response.Redirect("poolResults.asp?week=" & week & "&username=" & Server.URLEncode(username))
+                    else
+                        'toggleDialog()
+                        ' No error occurred, so the SQL execution was successful
+                        %>
+                            <script>
+                                $(document).ready(function() {
+                                    // Display success message
+                                    alert("Save was successful!");
+
+                                    // After 2 seconds, redirect to the specified URL
+                                    setTimeout(function() {
+                                        window.location.href = "poolResults.asp?week=<%= week %>";
+                                    }, 500); // 2000 milliseconds = 2 seconds
+                                });
+                            </script>
+                           <%
+                        'Response.Redirect("poolResults.asp?week=" & week)
+                     End If
 				end if
+
+				Err.Clear
 			end if
 		end if
 	end if
@@ -331,13 +378,13 @@
 		if USE_POINT_SPREADS then
 			cols = cols + 1
 		end if %>
-<!-- end of the first logic section table -->    
- 
- 
- 
- 
- 
-        
+<!-- end of the first logic section table -->
+
+
+
+
+
+
 	<form id="entryForm" action="<% = Request.ServerVariables("SCRIPT_NAME") %>" method="post">
 		<div>
 			<%			if IsAdmin() then %>
@@ -351,8 +398,19 @@
 		</div>
 
 
-  
+
 <!-- start of the games table -->
+
+        <% 'first get the stored tiebreaker values from the database to we have when we start the table building since they are in a different able
+        dim TB1value, TB2value
+
+        TB1value = 0
+        TB2value = 0
+
+        TB1value = TBvisGuess(username, week)
+        TB2value = TBhomeGuess(username, week)
+
+        %>
 
 
 <div class="clearfix" id="content-wrap">
@@ -360,33 +418,34 @@
     <div id="primary" class="hfeed">
         <div id="gameContainers">
         <span class="versusText">Week <% = week %></span><p>
-    
-            <%	
-            dim visitor, home, tie, logoHome, logoVis
+
+            <%
+            dim visitor, home, tie, logoHome, logoVis, tbgameValue
 			dim vpicked, hpicked, tpicked
 			dim correctPick
 			dim giveTie, halfStr
 			dim lockedConf
 			dim alt
 			halfStr = "<span style=""font-family: monospace;"">" & HALF_POINTS & "</span>"
-			
+
 	if(UBound(games) = -1) then
 		call errormessage(n) %>
-    
+
     	<div>There are no games currently on the schedule</div>
-	<% else	
+	<% else
 		'call errormessage(n)
-	'here is the start of the FOR loop
+	    'here is the start of the FOR loop
 		for i = 0 to UBound(games)
 
 
 
-			'call ErrorMessage("games(i) =" & i)	
-			
+			'call ErrorMessage("games(i) =" & i)
+
 			visitor = games(i).visitorName
 			home = games(i).homeName
 			logoHome = games(i).logoHome
 			logoVis = games(i).logoVis
+			tbgameValue = games(i).tbgame
 
 			'Get the player's pick data for this game.
 			if games(i).isLocked or entryDeleted then
@@ -396,13 +455,13 @@
 				pick = GetFieldValue("pick-" & (i + 1), games(i).storedPick)
 				conf = GetFieldValue("conf-" & (i + 1), games(i).storedConf)
 			end if
-			%> 
- 
- 
- <%'Handle the display for a locked game.
+			%>
+
+
+            <%'Handle the display for a locked game.
 			if games(i).isLocked then
-			
-			
+
+
 				if pick = TIE_STR then
 					tie = TIE_STR
 				else
@@ -495,10 +554,102 @@
 				vpicked = "&nbsp;&nbsp;" & vpicked
 				hpicked = "&nbsp;&nbsp;" & hpicked
 				tpicked = "&nbsp;&nbsp;" & tpicked
-				conf    = "&nbsp;" & conf %>            
-                
-                
-          
+				conf    = "&nbsp;" & conf %>
+
+                <%'Add a row for dynamically displaying the available confidence points.
+                if USE_CONFIDENCE_POINTS and (IsAdmin() or not allLocked) then %>
+        <!--          <tr class="subHeader topEdge" style="display: none;">
+                    <th id="pointsList" colspan="<% = cols %>"></th>
+                  </tr>-->
+                  <%		end if
+
+        '		''Build the player's score display, when available.
+                dim score, numGames, pctStr, scoreStr
+                numGames = NumberOfCompletedGames(week)
+                scoreStr = ""
+                pctStr = ""
+                if numGames > 0 then
+                    score = PlayerPickScore(username, week)
+                    if IsNumeric(score) and IsNumeric(numGames) then
+                        scoreStr = score & "/" & numGames
+                        pctStr = " (" & FormatPercentage(score / numGames) & ")"
+                        if USE_CONFIDENCE_POINTS then
+                            score = PlayerConfidenceScore(username, week)
+                            if IsNumeric(score) then
+                                scoreStr = scoreStr & pctStr & "&nbsp;&nbsp;<strong>" & FormatScore(score, false) & " pts. </strong>"
+                            end if
+                        else
+                            scoreStr = "<strong>" & scoreStr & "</strong>" & pctStr
+                        end if
+                    end if
+                end if
+                if not IsAdmin() and scoreStr <> "" then %>
+        <!--          <tr class="header topEdge bottomEdge">
+                    <th align="left" colspan="<%' = cols %>">Score</th>
+                  </tr>
+                  <tr>
+                    <td align="right" colspan="<%' = cols %>"><% = scoreStr %></td>
+                  </tr>-->
+                <% end if
+
+                'Get the tiebreaker game, pull the game in the db where tbgame field = 1
+                dim tbTitle, tbTitle2, tbStr, tbStr2, tbgame, tblocked, loopVar
+                tblocked = ""
+
+                'need to get the gameid from the games array where the tbgame = 1
+                for loopVar = 0 to (n-1)
+                    if games(loopVar).TBgame = 1 then
+                        tbgame = loopVar
+                    end if
+                    'call errormessage("the number of games in week " & week & " is " & n)
+                    'call errormessage("hi" & tbgame & games(loopVar).visitorName)
+                next
+
+                'call errormessage(tbgame & games(tbgame).visitorName)
+                tbTitle = "Enter game score: <strong>" & games(cint(tbgame)).visitorName  & "</strong>"
+                tbTitle2 = " at <strong>" & games(cint(tbgame)).homeName & "</strong>"
+
+
+                'Get the user's tiebreaker guess for this week.
+                dim storedTb1, storedTb2
+                storedTb1 = TBvisGuess(username, week)
+                storedTb2 = TBhomeGuess(username, week)
+                if not IsAdmin() and allLocked then
+                    tb1 = storedTb1
+                    tb2 = storedTb2
+                else
+                    tb1 = GetFieldValue("tb1-" & week, storedTb1)
+                    tb2 = GetFieldValue("tb2-" & week, storedTb2)
+                end if
+                if entryDeleted then
+                    tb1 = 0
+                    tb2 = 0
+                end if
+                'call errormessage(storedTb1)
+                'call errormessage(storedTb2)
+
+                'Get the tiebreaker data.
+                if allLocked then
+
+                    'Check for a tiebreaker point total.
+                    dim tbActualHome, tbActualVis
+                    tbActualHome = TBPointTotalHome(week)
+                    tbActualVis = TBPointTotalVis(week)
+                    if IsNumeric(tb) and IsNumeric(tbActualHome) and IsNumeric(tbActualVis) then
+                        tbStr = tb1 & "&nbsp;<strong>(" & 1 & ")</strong>"  'Abs((tbActualVis - tb1) + (tbActualHome - tb2)
+                        tbStr2 = tb2 & "&nbsp;<strong>(" & 1 & ")</strong>"  'Abs((tbActualVis - tb1) + (tbActualHome - tb2)
+                    elseif tb1 = "" or tb2 = "" then
+                        tbStr = "n/a"
+                        tbStr2 = "n/a"
+                    else
+                        tbStr = tb1
+                        tbStr2 = tb2
+                    end if
+
+                end if %>
+
+
+
              <!-- this is the locked game -->
               <div class="gameWrapper">
               <%if USE_POINT_SPREADS then %>
@@ -514,7 +665,7 @@
                             <!-- </p> -->
 
                             <!-- here is the visitor logo -->
-                           <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/<% = logoVis %>.png&h=250" alt="teamLogoVis" class="tlogo" />
+                            <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/<% = logoVis %>.png&h=250" alt="teamLogoVis" class="tlogo" />
                             <input type="radio" id="pick-<% = (i + 1) %>-V" name="pick-<% = (i + 1)%>" value="<% = games(i).visitorID %>" disabled="disabled" class="tradio"
                               <% if pick = games(i).visitorID then Response.Write(CHECKED_ATTRIBUTE) end if %> />
                             <!-- here is the visitor radio button -->
@@ -523,6 +674,7 @@
                         <div class="tmiddle locked">
                             <span class="entry-title"><% = visitor %> at <% = home %></span>
                             <h4 class="game-Date"><% = WeekdayName(Weekday(games(i).datetime), true) & " " & FormatDate(games(i).datetime) & " " & FormatTime(games(i).datetime) %></h4>
+                            <div id="game-Network-<% = games(i).espnGameId %>"></div>
                         </div>
 
                         <div class="tright locked">
@@ -532,15 +684,35 @@
                             <% if pick = games(i).homeID then Response.Write(CHECKED_ATTRIBUTE) end if %> />
                         </div>
                     </div><!--END div id trow -->
+                    <!-- Add TieBreaker section if this is the tiebreaker game -->
+                    <% 'tiebreaker game check
+                    if tbgameValue = 1 then %>
+
+                        <div class="tbrow trow locked">
+                            <div class="tbleft tleft locked">
+                                <input type="text" name="tb1-<% = week %>" value="<% = TB1value %>" size="5" class="tbleft" disabled="disabled" />
+                            </div>
+
+                            <div class="tbmiddle tmiddle locked">
+                                <span class="tb-title entry-title">TIEBREAKER GAME</span>
+                                <span class="tb-subtitle entry-title">Guess the Game Score</span>
+                            </div>
+
+                            <div class="tbright tright locked">
+                                <input type="text" name="tb2-<% = week %>" value="<% = TB2value %>" size="5" class="tbright" disabled="disabled" readonly="readonly"/>
+                            </div>
+                        </div>
+
+                    <%end if %>
 
                 </div>
               </div>
-                
-                   
-    
+
+
+
 		    <%'Handle the display for an unlocked game.
 				else %>
-		    
+
 	           <!-- this is an unlocked game unselected-->
                 <div class="gameWrapper">
                 <%if USE_POINT_SPREADS then %>
@@ -564,6 +736,7 @@
                         <div class="tmiddle">
                             <span class="entry-title"><% = visitor %> at <% = home %></span><!-- need the display name for this one -->
                             <h4 class="game-Date"><% = WeekdayName(Weekday(games(i).datetime), true) & " " & FormatDate(games(i).datetime) & " " & FormatTime(games(i).datetime) %></h4>
+                            <div id="game-Network-<% = games(i).espnGameId %>"></div>
                         </div>
 
                         <div class="tright">
@@ -572,139 +745,34 @@
                             <input type="radio" id="pick-<% = (i + 1) %>-H" name="pick-<% = (i + 1) %>" value="<% = games(i).homeID %>" class="tradio"
                                 <% if pick = games(i).homeID then Response.Write(CHECKED_ATTRIBUTE) end if %> />
                         </div>
-                        </div><!--END div id trow -->
+                      </div><!--END div id trow -->
+                      <!-- Add TieBreaker section if this is the tiebreaker game -->
+                        <% 'tiebreaker game check
+                        if tbgameValue = 1 then %>
+
+                            <div class="tbrow trow">
+                                <div class="tbleft tleft">
+                                    <input type="text" name="tb1-<% = week %>" value="<% = TB1value %>" size="5" class="tbleft" />
+
+                                </div>
+
+                                <div class="tbmiddle tmiddle">
+                                    <span class="tb-title entry-title">TIEBREAKER GAME</span>
+                                    <span class="tb-subtitle entry-title">Guess the Game Score</span>
+                                </div>
+
+                                <div class="tbright tright">
+                                    <input type="text" name="tb2-<% = week %>" value="<% = TB2value %>" size="5" class="tbright" />
+                                </div>
+                            </div>
+
+                        <%end if %>
                 </div>
                 </div>
-			<%	end if 
+			<%	end if
 			next %>
             </div>
 
-    
-    
-    
-    
-    
-    
-    	<%'Add a row for dynamically displaying the available confidence points.
-		if USE_CONFIDENCE_POINTS and (IsAdmin() or not allLocked) then %>
-<!--          <tr class="subHeader topEdge" style="display: none;">
-            <th id="pointsList" colspan="<% = cols %>"></th>
-          </tr>-->
-          <%		end if
-
-'		''Build the player's score display, when available.
-		dim score, numGames, pctStr, scoreStr
-		numGames = NumberOfCompletedGames(week)
-		scoreStr = ""
-		pctStr = ""
-		if numGames > 0 then
-			score = PlayerPickScore(username, week)
-			if IsNumeric(score) and IsNumeric(numGames) then
-				scoreStr = score & "/" & numGames
-				pctStr = " (" & FormatPercentage(score / numGames) & ")"
-				if USE_CONFIDENCE_POINTS then
-					score = PlayerConfidenceScore(username, week)
-					if IsNumeric(score) then
-						scoreStr = scoreStr & pctStr & "&nbsp;&nbsp;<strong>" & FormatScore(score, false) & " pts. </strong>"
-					end if
-				else
-					scoreStr = "<strong>" & scoreStr & "</strong>" & pctStr
-				end if
-			end if 
-		end if
-		if not IsAdmin() and scoreStr <> "" then %>
-<!--          <tr class="header topEdge bottomEdge">
-            <th align="left" colspan="<%' = cols %>">Score</th>
-          </tr>
-          <tr>
-            <td align="right" colspan="<%' = cols %>"><% = scoreStr %></td>
-          </tr>-->
-        <% end if
-
-		'Get the tiebreaker game (the last scheduled game of the week). changing to pull the game in the db where tbgame field = 1
-		dim tbTitle, tbTitle2, tbStr, tbStr2, tbgame, tblocked, loopVar
-		tblocked = ""
-		' old way tbTitle = "Pick points in the <strong>" & games(UBound(games)).visitorName ' & " at " & games(UBound(games)).homeName & "</strong> game:"
-		' old way tbTitle2 = " at " & games(UBound(games)).homeName & "</strong> game:"
-		
-		
-		'need to get the gameid from the games array where the tbgame = 1
-		for loopVar = 0 to (n-1)
-			if games(loopVar).TBgame = 1 then
-				tbgame = loopVar
-			end if
-			'call errormessage("the number of games in week " & week & " is " & n)
-			'call errormessage("hi" & tbgame & games(loopVar).visitorName)
-		next
-		
-		'call errormessage(tbgame & games(tbgame).visitorName)	
-		tbTitle = "Enter game score: <strong>" & games(cint(tbgame)).visitorName  & "</strong>"
-		tbTitle2 = " at <strong>" & games(cint(tbgame)).homeName & "</strong>"
-
-
-		 'Get the user's tiebreaker guess for this week.
-		dim storedTb1, storedTb2
-		storedTb1 = TBvisGuess(username, week)
-		storedTb2 = TBhomeGuess(username, week)
-		if not IsAdmin() and allLocked then
-			tb1 = storedTb1
-			tb2 = storedTb2
-		else
-			tb1 = GetFieldValue("tb1-" & week, storedTb1)
-			tb2 = GetFieldValue("tb2-" & week, storedTb2)
-		end if
-		if entryDeleted then
-			tb1 = ""
-			tb2 = ""
-		end if
-
-		'Get the tiebreaker data.
-		if allLocked then
-
-			'Check for a tiebreaker point total.
-			dim tbActualHome, tbActualVis
-			tbActualHome = TBPointTotalHome(week) 
-			tbActualVis = TBPointTotalVis(week)
-			if IsNumeric(tb) and IsNumeric(tbActualHome) and IsNumeric(tbActualVis) then
-				tbStr = tb1 & "&nbsp;<strong>(" & 1 & ")</strong>"  'Abs((tbActualVis - tb1) + (tbActualHome - tb2)
-				tbStr2 = tb2 & "&nbsp;<strong>(" & 1 & ")</strong>"  'Abs((tbActualVis - tb1) + (tbActualHome - tb2)
-			elseif tb1 = "" or tb2 = "" then
-				tbStr = "n/a"
-				tbStr2 = "n/a"
-			else
-				tbStr = tb1
-				tbStr2 = tb2
-			end if
-		end if %>
-        
-        
-        <div id="tbEntryContainer">
-          <span class="game-Title"><p align="center">Tiebreaker</p>
-			<p align="right"><% = tbTitle %>
-		
-		<%'If all the games are locked, display the tiebreaker info. Otherwise,
-		'display a form field for it.
-			if not IsAdmin() and TBgamelocked(week) then
-				'Response.Write(String(5, vbTab) & tb1)
-				'call errormessage(tb1 & tb2) %>
-				<input type="text" name="tb1-<% = week %>" value="<% = tb1 %>" size="3" class="<% = FieldStyleClass("numeric", "tb1-" & week) %>" "<% = tblocked %>" readonly="readonly"/>
-			<% else %>
-				<input type="text" name="tb1-<% = week %>" value="<% = tb1 %>" size="3" class="<% = FieldStyleClass("numeric", "tb1-" & week) %>" "<% = tblocked %>"/>
-			<% end if %>            
-        <!--</td><td colspan="2">-->
-			<% = tbTitle2 %>
-            <!--</td><td align="left" colspan="2">-->
-			
-		<%		'If all the games are locked, display the tiebreaker info. Otherwise,
-		'display a form field for it.
-		if not IsAdmin() and TBgamelocked(week) then
-			'Response.Write(String(5, vbTab) & tb2) %>
-			<input type="text" name="tb2-<% = week %>" value="<% = tb2 %>" size="3" class="<% = FieldStyleClass("numeric", "tb2-" & week) %>" <% = tblocked %> readonly="readonly" />
-		<% else %>
-            <input type="text" name="tb2-<% = week %>" value="<% = tb2 %>" size="3" class="<% = FieldStyleClass("numeric", "tb2-" & week) %>" <% = tblocked %>/>
-     	<% end if %>   
-     	</p></span>         
-      </div>
 		  
 	  <%		'List open dates.
 		'call DisplayOpenDates(2, week)
@@ -766,7 +834,7 @@
           
           
 </body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/common.js"></script>
 <script type="text/javascript" src="scripts/menu.js"></script>
 <script type="text/javascript" src="scripts/app.js"></script>
@@ -775,7 +843,7 @@
 <%	end if %>
 </html>
 
-<link href='http://fonts.googleapis.com/css?family=Roboto:900,300,500,400|Archivo+Narrow:700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto:900,300,500,400|Archivo+Narrow:700' rel='stylesheet' type='text/css'>
 
 <%	'**************************************************************************
 	'* Local class definitions.                                               *
@@ -786,7 +854,7 @@
 	'--------------------------------------------------------------------------
 	class GameObj
 
-		public id, datetime, visitorID, visitorName, homeID, homeName, pointSpread, logoHome, logoVis, tbgame, displayName
+		public id, datetime, visitorID, visitorName, homeID, homeName, pointSpread, logoHome, logoVis, tbgame, displayName, visitorScore, homeScore, espnGameId
 		public result, atsResult
 		public isLocked
 		public storedPick, storedConf
@@ -804,8 +872,10 @@
 			datetime    = CDate(rs.Fields("Date").Value & " " & rs.Fields("Time").Value)
 			visitorID   = rs.Fields("VisitorID").Value
 			visitorName = rs.Fields("VCity").Value
+			visitorScore = rs.Fields("VisitorScore").Value
 			homeID      = rs.Fields("HomeID").Value
 			homeName    = rs.Fields("HCity").Value
+			homeScore   = rs.Fields("HomeScore").Value
 			pointSpread = rs.Fields("PointSpread").Value
 			result      = rs.Fields("Result").Value
 			atsResult   = rs.Fields("ATSResult").Value
@@ -816,6 +886,8 @@
 			isLocked    = false
 			storedPick  = ""
 			storedConf  = ""
+			espnGameId		= rs.Fields("EspnGameId").Value
+
 
 			'Set the team names for display.
 			if rs.Fields("VDisplayName").Value <> "" then

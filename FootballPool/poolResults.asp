@@ -7,20 +7,20 @@
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="styles/style.css" />
 	<link rel="stylesheet" type="text/css" href="styles/menu.css" />
-    
+
 	<link rel="stylesheet" href="styles/newstyles/reset.css" type="text/css" media="screen" title="no title" />
 	<link rel="stylesheet" href="styles/newstyles/text.css" type="text/css" media="screen" title="no title" />
 	<link rel="stylesheet" href="styles/newstyles/form.css" type="text/css" media="screen" title="no title" />
 	<link rel="stylesheet" href="styles/newstyles/buttons.css" type="text/css" media="screen" title="no title" />
-	<link rel="stylesheet" href="styles/newstyles/grid.css" type="text/css" media="screen" title="no title" />	
-	<link rel="stylesheet" href="styles/newstyles/layout.css" type="text/css" media="screen" title="no title" />	
+	<link rel="stylesheet" href="styles/newstyles/grid.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="styles/newstyles/layout.css" type="text/css" media="screen" title="no title" />
 	<link rel="stylesheet" href="styles/newstyles/ui-darkness/jquery-ui-1.8.12.custom.css" type="text/css" media="screen" title="no title" />
 	<link rel="stylesheet" href="styles/newstyles/plugin/jquery.visualize.css" type="text/css" media="screen" title="no title" />
 	<link rel="stylesheet" href="styles/newstyles/plugin/facebox.css" type="text/css" media="screen" title="no title" />
 	<link rel="stylesheet" href="styles/newstyles/plugin/uniform.default.css" type="text/css" media="screen" title="no title" />
 	<link rel="stylesheet" href="styles/newstyles/plugin/dataTables.css" type="text/css" media="screen" title="no title" />
 	<link rel="stylesheet" href="styles/newstyles/custom.css" type="text/css" media="screen" title="no title">
-    
+
 	<script type="text/javascript" src="scripts/common.js"></script>
 	<script type="text/javascript" src="scripts/menu.js"></script>
 
@@ -28,7 +28,7 @@
 
     <script src="js/jquery/jquery-1.5.2.min.js"></script>
 	<script src="js/jquery/jquery-ui-1.8.12.custom.min.js"></script>
-    <script src="js/misc/excanvas.min.js"></script>
+<!--    <script src="js/misc/excanvas.min.js"></script>-->
     <script src="js/jquery/facebox.js"></script>
     <script src="js/jquery/jquery.visualize.js"></script>
 
@@ -39,8 +39,8 @@
 
     <script type="text/javascript" src="scripts/tableSort.js"></script>
 
-    <script src="js/widgets.js"></script>
-    <script src="js/dashboard.js"></script>
+<!--    <script src="js/widgets.js"></script>-->
+<!--    <script src="js/dashboard.js"></script>-->
 
     <script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
@@ -50,8 +50,8 @@
 				} );
 			} );
 	</script>
-    
-    
+
+
 	<link href="styles/style.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -60,41 +60,41 @@
 <!-- #include file="includes/menu.asp" -->
 <!-- #include file="includes/weekly.asp" -->
 	<!--<table class="left_aligned_style" id="wrapper"><tr><td style="padding: 0px;">-->
-    <div id="wrapper"> 
+    <div id="wrapper">
     	<div id="content" class="xgrid">
-            
+
     		<div class="x12">
-    
-    
-    
-               
+
+
+
+
         <%	'Open the database.
             call OpenDB()
-        
+
             'Get the week to display.
             dim week
             week = GetRequestedWeek()
-        
+
             'Find the number of games for this week.
             dim numGames
             numGames = NumberOfGames(week)
-        
+
             'See if this user is missing any picks for this week.
             dim username
             dim tbActualVis, tbActualHome, tbGuessVis, tbGuessHome
             dim sql, rs
             username = Session(SESSION_USERNAME_KEY)
-            
+
             if IsAdmin() then
                 username = Request.QueryString("username")
             end if
-            
+
             'set tbActual = new TBclass
             tbActualVis = TBPointTotalVis(week) 'nee to check on this one
             tbActualHome = TBPointTotalHome(week)
             tbGuessVis  = TBvisGuess(username, week)
             tbGuessHome  = TBhomeGuess(username, week)
-            
+
             'this is doing a count of the total games and checking if the same number of picks exist
             if username <> "" then
                 if tbActualHome = "" and tbActualVis = "" and tbGuessVis <> "" and tbGuessHome = "" then
@@ -112,11 +112,11 @@
                     end if
                 end if
             end if
-        
+
             'Determine if all games for the week have been locked.
             dim allLocked
-            allLocked = AllGamesLocked(week) 
-            
+            allLocked = AllGamesLocked(week)
+
             'Build the display.
             dim gameCols, otherCols
             gameCols  = numGames
@@ -124,10 +124,10 @@
             if USE_CONFIDENCE_POINTS then
                 otherCols = otherCols + 2
             end if %>
-            
-    
-    <% call DisplayWeekNavigation(1, "")  %> 
-                            
+
+
+    <% call DisplayWeekNavigation(1, "")  %>
+
      <table class="data display datatable" id="example">
         <thead>
             <tr>
@@ -141,18 +141,18 @@
 					for g = 1 to gameCols %>
 					<th><% = g %></th>
                 <% next %>
-                
-                
-                
-                
+
+
+
+
             </tr>
-        </thead> 
+        </thead>
 
 		<!--<tbody id="poolResults">-->
-        
+
         <tbody>
- 
-        
+
+
 <%	dim completedGames, totalGames, list
 	dim users, currentUser
 	dim leadConfScore
@@ -178,22 +178,22 @@
 
 		dim alt
 		alt = false
-		
+
 		'so now we are going to loop through the list of users and build a row for each of them
 		for i = 0 to UBound(users)
-			
+
 			if alt then %>
             	<tr class="odd">
 <%			else %>
             	<tr class="even">
 <%			end if
 			alt = not alt %>
-            
-            
-            
+
+
+
 			<td align="left"><% = users(i).name %></td>
-                 
-                
+
+
 			<% 'Build the tiebreaker display.
 			tbGuessVis = "--"
 			tbGuessHome = "--"
@@ -207,13 +207,13 @@
 					'call ErrorMessage(tbActualHome & " " & users(i).tbGuessHome & " " & tbActualVis & " " & users(i).tbGuessVis & " " & tbdiff & " " & totalGames)
 				end if
 			end if
-			
+
 			'Determine if the pick should be hidden.
 			hidePick = false
 			if HIDE_OTHERS_PICKS and not allLocked and not IsAdmin() and currentUser <> users(i).name then
 					hidePick = true
 			end if
-			
+
 			if hidePick then
 				tbGuessVis = "XX"
 				tbGuessHome = "XX"
@@ -250,20 +250,20 @@
 				<td><% = pickPct %></td>
 				<td><% = tbDiff %></td>
 				<td>(<% = tbGuessVis %>/<% = tbGuessHome %>)</td>
-				
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <%			'Display picks for this user, highlighting the correct ones.
 			sql = "SELECT * FROM Picks, Schedule" _
 			   & " WHERE Username = '" & SqlString(users(i).name) & "'" _
@@ -283,7 +283,7 @@
 						hidePick = true
 					end if
 				end if
-				
+
 				'Determine the correct pick.
 				if USE_POINT_SPREADS then
 					correctPick = rs.Fields("ATSResult").Value
@@ -322,8 +322,8 @@
 						pick = FormatWinner(pick)
 					end if
 				end if
-				
-				
+
+
 				if USE_CONFIDENCE_POINTS then %>
 					<!--			<td class="confPick"><% = pick %><br /><% = conf %></td>-->
 <%				else %>
@@ -346,18 +346,18 @@
 			</tr>
 <%	end if %>
 		</tbody>
-        
 
-    
+
+
 	</table>
-    
-    
-    </div> <!-- .x12 -->
-		
 
-    
-    
-    
+
+    </div> <!-- .x12 -->
+
+
+
+
+
         <p>&nbsp;      </p>
     <p>&nbsp;</p>
     <p>
@@ -366,10 +366,10 @@
     </p>
     	</div> <!-- #content -->
    <!--</p></td></tr></table>-->
-    
-  
-    
-    
+
+
+
+
 
 <!-- #include file="includes/footer.asp" -->
 

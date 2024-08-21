@@ -31,14 +31,16 @@
 		restoreFields = true
 
 		'Set the form field names based on which form was submitted.
-		dim usernameField, password1Field, password2Field
-		dim username, email, password1, password2, formStr
+		dim usernameField, userDisplaynameField, password1Field, password2Field
+		dim username, displayname, email, password1, password2, formStr
 		usernameField = ""
+		displayname = ""
 		password1Field = ""
 		password2Field = ""
 		formStr = "Request"
 		if Request.Form("submit") = "Add" then
 			usernameField = "addUsername"
+			userDisplaynameField = "addDisplayname"
 			password1Field = "addPassword1"
 			password2Field = "addPassword2"
 			formStr = "Add user request"
@@ -54,6 +56,7 @@
 
 		'Get the form field values.
 		username  = Request.Form(usernameField)
+		displayname = Request.Form(userDisplaynameField)
 		password1 = Request.Form(password1Field)
 		password2 = Request.Form(password2Field)
 		email     = Request.Form("addEmail")
@@ -78,6 +81,14 @@
 					end if
 				end if
 			end if
+
+			'For new user add, also validate the displayname field
+			if Request.Form("submit") = "Add" then
+                badChar = IsCleanAndValidDisplayname(displayname)
+                if badChar then
+                    FormFieldErrors.Add "displayname", "Displaynames may not contain a '" & Server.HtmlEncode(badChar) & "' character."
+                end if
+            end if
 
 			'For user deletes, make sure the user has no picks for completed
 			'games or any account transactions in the database.
@@ -143,8 +154,9 @@
 			if Request.Form("submit") = "Add" then
 				salt = CreateSalt()
 				sql = "INSERT INTO Users" _
-				  & " (Username, EmailAddress, Salt, [Password])" _
+				  & " (Username, UserDisplayname, EmailAddress, Salt, [Password])" _
 				  & " VALUES('" & SqlString(username) & "'," _
+				  & " '" & SqlString(displayname) & "'," _
 				  & " '" & Encrypt(email) & "'," _
 				  & " '" & salt & "'," _
 				  & " '" & Hash(salt & password1) & "')"

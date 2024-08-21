@@ -152,7 +152,7 @@
 		
 		dim gameID, gameWeek, gameDate, gameTime, displayValue, homeTeam
 		dim homeTeamID, visTeam, visTeamID, viewTime, pointSpread, fullGameID, inPool
-		dim logoVis, logoHome, maxGameID, infoMsg
+		dim logoVis, logoHome, maxGameID, infoMsg, espnGameId
 		
 		'this is the update for the setSchedule
 		'first we will clear any entries from the schedule table for the given week
@@ -180,6 +180,7 @@
 				pointSpread = Trim(Request.Form("spread-"   & i))
 				visTeamID = Trim(Request.Form("visID-"   & i))
 				homeTeamID = Trim(Request.Form("homeID-"   & i))
+				espnGameId = Trim(Request.Form("espnGameId-"   & i))
 				
 				if isDate(gameDate) then
 					gameDate = CDate(gameDate)
@@ -219,8 +220,8 @@
 					gameTimeSql = "'" & gameTime & "'"
 				end if
 					
-				sql = "INSERT INTO SCHEDULE ( Week, [Date], [Time], VisitorID, PointSpread, HomeID) " _
-					& "VALUES (" & week & ", '" & gameDate & "', " & gameTimeSql & ", '" & visTeamID & "', " & pointSpread & ", '" & homeTeamID & "')"
+				sql = "INSERT INTO SCHEDULE ( Week, [Date], [Time], VisitorID, PointSpread, EspnGameId, HomeID) " _
+					& "VALUES (" & week & ", '" & gameDate & "', " & gameTimeSql & ", '" & visTeamID & "', " & pointSpread & ", '" & espnGameId & "', '" & homeTeamID & "')"
 				call DbConn.Execute(sql)
 				
 				'and now to update the fullSchedule table as well

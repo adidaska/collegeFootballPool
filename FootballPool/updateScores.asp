@@ -7,8 +7,10 @@
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="styles/style.css" />
 	<link rel="stylesheet" type="text/css" href="styles/menu.css" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="scripts/common.js"></script>
 	<script type="text/javascript" src="scripts/menu.js"></script>
+	<script type="text/javascript" src="js/jaflGamesScores.js"></script>
 </head>
 <body>
 <!-- #include file="includes/header.asp" -->
@@ -117,7 +119,7 @@
 
 	'Display the schedule for the specified week.
 	dim cols
-	cols = 8
+	cols = 10
 	if USE_POINT_SPREADS then
 		cols = cols + 1
 	end if %>
@@ -127,7 +129,7 @@
 			<tr class="header bottomEdge">
 			  <th align="left" colspan="<% = cols %>">Week <% = week %></th>
 			</tr>
-<%	dim gameDate, gameTime, vid, hid
+<%	dim gameDate, gameTime, vid, hid, espnGameID, espnHomeScore, espnVisitorScore
 	dim visitor, home, result, checkedStr
 	dim spread, atsResult
 	dim alt
@@ -149,6 +151,7 @@
 			atsResult = rs.Fields("ATSResult").Value
 			visitor   = rs.Fields("VCity").Value
 			home      = rs.Fields("HCity").Value
+			espnGameID      = rs.Fields("EspnGameId").Value
 
 			'Set the team names for display.
 			if rs.Fields("VDisplayName") <> "" then
@@ -201,8 +204,10 @@
 <%			if USE_POINT_SPREADS then %>
 				<td><% = FormatPointSpread(spread) %></td>
 <%			end if %>
+                <td class="visitorscore_<% = espnGameID%>">Loading...</td>
 				<td><input type="text" name="vscore-<% = n %>" value="<% = vscore %>" size="2" class="<% = FieldStyleClass("numeric", "vscore-" & n) %>" /></td>
 				<td>at <% = home %></td>
+				<td class="homescore_<% = espnGameID%>">Loading...</td>
 				<td><input type="text" name="hscore-<% = n %>" value="<% = hscore %>" size="2" class="<% = FieldStyleClass("numeric", "hscore-" & n) %>" /></td>
 				<td><label for="ot-<% = n %>"><span class="small">OT</span></label> <input type="checkbox" id="ot-<% = n %>" name="ot-<% = n %>" value="true"<% = checkedStr %> /></td>
 			</tr>

@@ -475,7 +475,7 @@
 						totalScore = totalScore + confScore
 					end if
 				end if
-				totalGames = totalGames + NumberOfCompletedGames(week)
+				totalGames = NumberOfTotalCompletedGames()
 				rs.MoveNext
 			loop
 

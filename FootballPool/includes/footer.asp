@@ -8,6 +8,3 @@
 	
 	et = CurrentDateTime() %>
 	<div id="serverTimestamp" style="display: none;"><% = DatePart("yyyy", et) & "/" & DatePart("m", et) & "/" & DatePart("d", et) & " " & FormatDateTime(et, vbLongTime) %></div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/jaflGames.js"></script>
-    <script src="scripts/analyticstracking.js"></script>

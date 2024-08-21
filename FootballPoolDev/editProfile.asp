@@ -61,7 +61,7 @@
         
 
 	'If and update was requested, process it.
-	dim email, contact, news, schedule, spread, result, disable
+	dim email, contact, news, schedule, spread, result, disable, phone, userDisplayName, firstName, lastName
 	dim sql, rs
 	if Request.Form("submit") = "Update" and username <> "" then
 
@@ -73,6 +73,8 @@
 		spread   = Trim(Request.Form("spread"))
 		result   = Trim(Request.Form("result"))
 		disable  = Trim(Request.Form("disable"))
+		phone  = Trim(Request.Form("phone"))
+		userDisplayName  = Trim(Request.Form("userDisplayName"))
 		if LCase(news)     <> "true" then news     = false end if
 		if LCase(schedule) <> "true" then schedule = false end if
 		if LCase(spread)   <> "true" then spread   = false end if
@@ -94,6 +96,8 @@
 			sql = "UPDATE Users SET" _
 			   & " EmailAddress = '" & Encrypt(email) & "'," _
 			   & " ContactInformation = '" & Encrypt(contact) & "'," _
+			   & " PhoneNumber = '" & Encrypt(phone) & "'," _
+			   & " UserDisplayName = '" & userDisplayName & "'," _
 			   & " NotifyOfNewsUpdates = " & news & "," _
 			   & " NotifyOfScheduleUpdates = " & schedule & "," _
 			   & " NotifyOfSpreadUpdates = " & spread & ", " _
@@ -124,6 +128,10 @@
 			spread   = GetFieldValue("spread",   rs.Fields("NotifyOfSpreadUpdates").Value)
 			result   = GetFieldValue("result",   rs.Fields("NotifyOfResultUpdates").Value)
 			disable  = GetFieldValue("disable",  rs.Fields("DisableEntries").Value)
+			phone    = GetFieldValue("phone",  rs.Fields("PhoneNumber").Value)
+			userDisplayName   = GetFieldValue("userDisplayName",  rs.Fields("UserDisplayName").Value)
+			firstName         = GetFieldValue("disable",  rs.Fields("First Name").Value)
+			lastName          = GetFieldValue("lastName",  rs.Fields("Last Name").Value)
 
 			'Set the checkbox states.
 			newsCheckedStr = "" : scheduleCheckedStr = "" : spreadCheckedStr = "" : resultCheckedStr = ""
@@ -192,6 +200,10 @@
 			                    <td><strong>Username:</strong></td>
 			                    <td><% = username %></td>
 			                </tr>
+			                <tr>
+                                <td><strong>Display Name:</strong></td>
+                                <td><input type="text" name="userDisplayName" value="<% = Server.HtmlEncode(userDisplayName) %>" size="30" class="<% = FieldStyleClass("", "userDisplayName") %>" style="width: 18em;" /></td>
+                            </tr>
 			                <tr>
 			                    <td><strong>Email address:</strong></td>
 			                    <td><input type="text" name="email" value="<% = Server.HtmlEncode(email) %>" size="30" class="<% = FieldStyleClass("", "email") %>" style="width: 18em;" /></td>

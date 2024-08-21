@@ -189,7 +189,7 @@ body {
 }
 
 .gameWrapper {
-    min-height: 200px;
+    min-height: 235px;
 }
 
 #gameContainers {
@@ -2263,11 +2263,14 @@ a:hover.button.black { border: 1px solid #2c2c2c; }
 
 .tleft, .tright {
     display: table-cell;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     width: 130px;
     margin: auto;
     font: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
-    padding: 5;
+    padding: 10px;
     text-align: center;
     background-repeat: no-repeat;
     background-size: 110px;
@@ -2275,6 +2278,32 @@ a:hover.button.black { border: 1px solid #2c2c2c; }
     border: 1px solid;
     border-color: #ececec;
     background-color: #FFF;
+}
+
+.gameSelected {
+    box-shadow: 0 0 0 10px rgb(17, 34, 102) inset;
+}
+
+.tbrow {
+
+}
+
+.tbleft, .tbright {
+    vertical-align: middle;
+    margin: auto;
+    text-align: center;
+}
+
+.tb-title {
+    font-weight: bold;
+    font-size: 2em;
+    font-family: 'Avenir';
+}
+
+.tb-subtitle {
+    display: inline-block;
+    line-height: 20px;
+    font-family: 'Avenir';
 }
 
 .visitorName {

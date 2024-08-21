@@ -37,7 +37,7 @@
 	const PAGE_TITLE = "JAFL - Just Another Football League"
 
 	'Administrator email address.
-	const ADMIN_EMAIL = "andres.arbelaez@me.com"
+	const ADMIN_EMAIL = "Andres.arbelaez1@icloud.com"
 
 	'Flag indicating whether the server can send email or not.
 	const SERVER_EMAIL_ENABLED = false
@@ -476,6 +476,25 @@
 
 	end function
 
+    '--------------------------------------------------------------------------
+    ' Returns the number of completed games (i.e., games with a result)
+    ' for the specified week.
+    '--------------------------------------------------------------------------
+    function NumberOfTotalCompletedGames()
+
+        dim sql, rs
+
+        NumberOfTotalCompletedGames = 0
+        sql = "SELECT COUNT(*) AS Total" _
+           & " FROM Schedule WHERE" _
+           & " NOT ISNULL(Result)"
+        set rs = DbConn.Execute(sql)
+        if not (rs.BOF and rs.EOF) then
+            NumberOfTotalCompletedGames = rs.Fields("Total").Value
+        end if
+
+    end function
+
 	'--------------------------------------------------------------------------
 	' Returns the number of games scheduled for the specified week.
 	'--------------------------------------------------------------------------
@@ -537,7 +556,7 @@
 	'--------------------------------------------------------------------------
 	sub OpenDB()
 
-		dim dbDir, connectstr
+        dim dbDir, connectstr
 
 		set DbConn = Server.CreateObject("ADODB.Connection")
 		dbDir = Server.MapPath(DATABASE_FILE_PATH)
@@ -741,7 +760,7 @@
 	'--------------------------------------------------------------------------
 	function WeeklySchedule(week)
 
-		dim sql
+		dim sql, sql2
 
 		'Retrieve the week's schedule from the database.
 		sql = "SELECT Schedule.*," _
@@ -751,21 +770,20 @@
 		   & " WHERE Schedule.VisitorID = VTeams.TeamID and Schedule.HomeID = HTeams.TeamID" _
 		   & " AND Week = " & week _
 		   & " ORDER BY Date, Time, VTeams.City, VTeams.Name"
-		set WeeklySchedule = DbConn.Execute(sql)
 
         sql2 =  "SELECT Schedule.*, FullSchedule.*," _
-        	& " VTeams.City AS VCity, VTeams.Name AS VName, VTeams.DisplayName AS VDisplayName, VTeams.Logo AS logoVis," _
+            & " VTeams.City AS VCity, VTeams.Name AS VName, VTeams.DisplayName AS VDisplayName, VTeams.Logo AS logoVis," _
             & " HTeams.City AS HCity, HTeams.Name AS HName, HTeams.DisplayName AS HDisplayName, HTeams.Logo AS logoHome" _
-        	& " FROM Schedule JOIN FullSchedule ON Schedule.FullScheduleID = FullSchedule.ID" _
-        	& " LEFT JOIN Teams AS VTeams ON Schedule.VisitorID = VTeams.TeamID" _
-        	& " LEFT JOIN Teams AS HTeams ON Schedule.HomeID = HTeams.TeamID" _
-        	& " WHERE Week = " & week" _
-        	& " ORDER BY Date, Time, VTeams.City, VTeams.Name"
+            & " FROM Schedule JOIN FullSchedule ON Schedule.FullScheduleID = FullSchedule.ID" _
+            & " LEFT JOIN Teams AS VTeams ON Schedule.VisitorID = VTeams.TeamID" _
+            & " LEFT JOIN Teams AS HTeams ON Schedule.HomeID = HTeams.TeamID" _
+            & " WHERE Schedule.Week = " & week _
+            & " ORDER BY Schedule.Date, Schedule.Time, VTeams.City, VTeams.Name"
 
-        set WeeklySchedule = DbConn.Execute(sql)
+		set WeeklySchedule = DbConn.Execute(sql)
 
 	end function
-	
+
 
 
 	'**************************************************************************
@@ -960,51 +978,51 @@
 		end if
 
 	end function
-	
-	
 
-	
-	
+
+
+
+
 	'--------------------------
 	'this function is to replicate the format function from vb
 	'--------------------------
-	
-	Function Format(vExpression, sFormat) 
- 
- 		Dim fmt
-        set fmt = CreateObject("MSSTDFMT.StdDataFormat") 
-        fmt.Format = sFormat 
- 
-        set rs = CreateObject("ADODB.Recordset") 
-        rs.Fields.Append "fldExpression", 12 ' adVariant 
- 
-        rs.Open 
-        rs.AddNew 
- 
-        set rs("fldExpression").DataFormat = fmt 
-        rs("fldExpression").Value = vExpression 
- 
-        Format = rs("fldExpression").Value 
- 
-        rs.close: Set rs = Nothing: Set fmt = Nothing 
- 
-    End Function
-	
-	
-	
-	
 
-	
-	
-	
-	
-	
+	Function Format(vExpression, sFormat)
+
+ 		Dim fmt
+        set fmt = CreateObject("MSSTDFMT.StdDataFormat")
+        fmt.Format = sFormat
+
+        set rs = CreateObject("ADODB.Recordset")
+        rs.Fields.Append "fldExpression", 12 ' adVariant
+
+        rs.Open
+        rs.AddNew
+
+        set rs("fldExpression").DataFormat = fmt
+        rs("fldExpression").Value = vExpression
+
+        Format = rs("fldExpression").Value
+
+        rs.close: Set rs = Nothing: Set fmt = Nothing
+
+    End Function
+
+
+
+
+
+
+
+
+
+
 	Function listUpdateSchedule(week)
-	
-	
-	
+
+
+
 	end Function
-	
+
 
 	'**************************************************************************
 	'* Common displays.                                                       *
@@ -1118,12 +1136,12 @@
 			Response.Write(String(nTabs, vbTab) & "<p><strong>Go to week:</strong> " & str & "</p>")
 		end if
 
-	end sub 
-	
-	
+	end sub
+
+
 	'--------------------------------------------------------------------------
-	' Displays a list of links for viewing different weeks. 
-	' 
+	' Displays a list of links for viewing different weeks.
+	'
 	' this one is for the fullschedule
 	'--------------------------------------------------------------------------
 	sub DisplayWeekNavigationFS(nTabs, otherParams)
@@ -1150,23 +1168,37 @@
 
 	end sub
 
+    '--------------------------------------------------------------------------
+    ' Takes the displayname user is entering and validates ok to use and cleans for storage.
+    '--------------------------------------------------------------------------
+    function IsCleanAndValidDisplayname(displayname)
 
-	function ReplaceChar(name)
+        dim encoded, i
 
-        Set regExp = New RegExp
-        regExp.IgnoreCase = True
-        regExp.Global = True
-        regExp.Pattern = "[^a-z0-9 !@]" 'Add here every character you don't consider as special character
+            IsCleanAndValidDisplayname = true
 
-        strProcessed = regExp.Replace(name, "?")
-        ReplaceChar = strProcessed
+            'Disallow commas.
+            if InStr(displayname, ",") then
+                IsCleanAndValidDisplayname = false
+                exit function
+            end if
 
-	end function
+            'Disallow any HTML reserved characters.
+            if InStr(displayname, "&") then
+                IsCleanAndValidDisplayname = false
+                exit function
+            end if
+            encoded = Server.HtmlEncode(displayname)
+            i = 1
+            do while i <= Len(username) and i <= Len(encoded) and IsCleanAndValidDisplayname = true
+                if Mid(displayname, i, 1) <> Mid(encoded, i, 1) then
+                    IsCleanAndValidDisplayname = false
+                end if
+                i = i + 1
+            loop
 
+    end function
 
-
-	
 	%>
-	
     
     

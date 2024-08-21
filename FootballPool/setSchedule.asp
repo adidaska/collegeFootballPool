@@ -41,7 +41,7 @@
 	
 	'If there is form data, process it.
 	dim n, i
-	dim gameID, gameWeek, gameDate, gameTime, displayValue, homeTeam, homeTeamID, visTeam, visTeamID, viewTime, pointSpread, fullGameID, inPool
+	dim gameID, gameWeek, gameDate, gameTime, displayValue, homeTeam, homeTeamID, visTeam, visTeamID, viewTime, pointSpread, fullGameID, inPool, espnGameId
 	dim logoVis, logoHome
 	dim notify, infoMsg
 	dim sql, rs
@@ -152,6 +152,7 @@
 			logoVis  		= rs.Fields("logoVis").Value
 			homeTeamID  	= rs.Fields("homeTeamID").Value
 			logoHome  		= rs.Fields("logoHome").Value
+			espnGameId      = rs.Fields("GameId").Value
 
 			if alt then %>
           <tr class="alt">
@@ -176,6 +177,7 @@
             <td><input type="hidden" name="id-<% = n %>" value="<% = fullGameID %>" />
             <input type="hidden" name="homeID-<% = n %>" value="<% = homeTeamID %>" />
             <input type="hidden" name="visID-<% = n %>" value="<% = visTeamID %>" />
+            <input type="hidden" name="espnGameId-<% = n %>" value="<% = espnGameId %>" />
 
               <input type="text" name="week-<% = n %>" value="<% = gameWeek %>" size="2" class="<% = FieldStyleClass("numeric", "week-" & n) %>" /></td>
             <td align="right"><input type="text" name="day-<% = n %>" value="<% = WeekdayName(Weekday(gameDate), true) %>" size="3" class="readonly" readonly="readonly" /></td>
